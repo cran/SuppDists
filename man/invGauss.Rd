@@ -42,7 +42,13 @@ Probability functions:
 where \eqn{\Phi[]}{Phi[]} is the standard normal distribution function.
 
 
-The calculations are accurate to at least seven significant figures over an extended range - much larger than that of any existing tables. We have tested them for \eqn{\lambda / \nu = 10e-20}{(lambda/nu)=10e-20}, and \eqn{\lambda/\nu=10e4}{lambda / nu = 10e4}. Accessible tables are those of Wassan and Roy (1969), which unfortunately, are sometimes good to only two significant digits. Much better tables are available in an expensive CRC Handbook (1989) – these tables are accurate to at least 7 significant digits for \eqn{\lambda/\nu \ge 0.02}{lambda / nu >= 0.02} to \eqn{\lambda/\nu \le 4000}{lambda / nu <= 4000}. 
+The calculations are accurate to at least seven significant figures over
+an extended range - much larger than that of any existing tables. We
+have tested them for \eqn{\lambda / \nu = 10e-20}{(lambda/nu)=10e-20},
+and \eqn{\lambda/\nu=10e4}{lambda / nu = 10e4}. Accessible tables are
+those of Wassan and Roy (1969), which unfortunately, are sometimes good
+to only two significant digits. Much better tables are available in an
+expensive CRC Handbook (1989), which are accurate to at least 7 significant digits for \eqn{\lambda/\nu \ge 0.02}{lambda / nu >= 0.02} to \eqn{\lambda/\nu \le 4000}{lambda / nu <= 4000}. 
 
 
 
@@ -86,3 +92,4 @@ pars<-sinvGauss(1, 16)
 plot(function(x)dinvGauss(x,1, 16),pars$Mean-3*pars$SD,pars$Mean+3*pars$SD)
 }
 \keyword{distribution}
+

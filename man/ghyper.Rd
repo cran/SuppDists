@@ -108,6 +108,12 @@ Suppose accidents follow a Poisson distribution with mean L, and suppose L varie
 
 }
 
+\note{The parameters of these functions differ from those of the
+  hypergeometric functions of R. To translate between the two use the
+  following as a model: phyper(x,m,n,k) = pghyper(x,k,m,m+n).
+}
+
+
 \references{
 
 Johnson, N.L., Kotz, S. and Kemp, A. (1992) \emph{Univariate discrete distributions}. Wiley, N.Y.

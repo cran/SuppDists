@@ -52,7 +52,7 @@ The original paper is Kruskal and Wallis (1952) with errata appearing in Kruskal
 
 Kruskal, W.H. and Wallis, W.A. (1952) Use of ranks in one-criterion variance analysis. \emph{Jour. Am. Stat. Assoc.} \bold{47.} 583-634
 
-Kruskal, W.H. and Wallis, W.A. (1952) Errata to Use of ranks in one-criterion variance analysis. \emph{Jour. Am. Stat. Assoc.} \bold{48.} 907-911.
+Kruskal, W.H. and Wallis, W.A. (1953) Errata to Use of ranks in one-criterion variance analysis. \emph{Jour. Am. Stat. Assoc.} \bold{48.} 907-911.
 
 
 Wallace, D.L. (1959). Simplified beta-approximations to the Kruskal-Wallis H test. \emph{Jour. Am. Stat. Assoc.} \bold{54.} 225-230.
