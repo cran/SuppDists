@@ -1,0 +1,15 @@
+Friedman                 Friedman's chi-square
+Johnson                  The Johnson distributions
+Kendall                  The distribution of Kendall's tau
+KruskalWallis            Kruskall-Wallis distribution
+MWC1019                  A very long period pseudo-random generator
+NormalScore              Normal Scores distribution
+Spearman                 Spearman's rho
+SuppDists-internal       Internal SuppDists function
+Pearson                  The Pearson product moment correlation
+                         coefficient
+ghyper                   Generalized hypergeometric distributions
+ghyper.types             Kemp and Kemp generalized hypergeometric types
+invGauss                 The inverse Gaussian and Wald distributions
+maxFratio                The maximum F-ratio distribution
+ziggurat                 The Ziggurat normal and exponential generator
