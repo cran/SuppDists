@@ -264,19 +264,19 @@ function (q, r, N, lower.tail = TRUE, log.p = FALSE)
     value
 }
 pghyper <-
-function (x, a, k, N, lower.tail = TRUE, log.p = FALSE) 
+function (q, a, k, N, lower.tail = TRUE, log.p = FALSE) 
 {
-    M <- max(length(x), length(a), length(k), length(N))
-    x <- rep(x, length.out = M)
+    M <- max(length(q), length(a), length(k), length(N))
+    q <- rep(q, length.out = M)
     a <- rep(a, length.out = M)
     k <- rep(k, length.out = M)
     N <- rep(N, length.out = M)
     if (lower.tail == TRUE) {
-        value <- .C("pghyperR", as.integer(x), as.double(a), 
+        value <- .C("pghyperR", as.integer(q), as.double(a), 
             as.double(k), as.double(N), as.integer(M), val = double(M))$val
     }
     else {
-        value <- .C("ughyperR", as.integer(x), as.double(a), 
+        value <- .C("ughyperR", as.integer(q), as.double(a), 
             as.double(k), as.double(N), as.integer(M), val = double(M))$val
     }
     if (log.p == TRUE) 

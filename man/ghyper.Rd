@@ -20,7 +20,7 @@
   Density, distribution function, quantile function, random generator and summary function for generalized hypergeometric distributions.
 }
 \usage{
-dghyper(x, a, k, N, log.p=FALSE)
+dghyper(x, a, k, N, log=FALSE)
 pghyper(q, a, k, N, lower.tail=TRUE, log.p=FALSE)
 qghyper(p, a, k, N, lower.tail=TRUE, log.p=FALSE)
 rghyper(n, a, k, N)
