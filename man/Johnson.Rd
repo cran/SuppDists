@@ -16,28 +16,26 @@ pJohnson(q, parms, lower.tail=TRUE, log.p=FALSE)
 qJohnson(p, parms, lower.tail=TRUE, log.p=FALSE)
 rJohnson(n, parms)
 sJohnson(parms)
-JohnsonFit(x,moment=FALSE) 
+JohnsonFit(t,moment="quant") 
 moments(x)
 }
 \arguments{
 	\item{x,q}{vector of quantities}
+	\item{t}{observation vector, t=x, or moment vector, t=[mean,m2,m3,m4]}
 	\item{p}{vector of probabilities}
 	\item{n}{vector of numbers of observations}
 	\item{parms}{list or list of lists each containing output of JohnsonFit()}
-	\item{moment}{logical scalar; if TRUE, fit will be done using the moments of x, otherwise quantiles are used}
+	\item{moment}{character scalar specifying t: "quant" (default), or "use," or "find"}
 	\item{log, log.p}{logical vector; if TRUE, probabilities p are given as log(p)}
 	\item{lower.tail}{logical vector; if TRUE (default), probabilities are \eqn{P[X <= x]}, otherwise, \eqn{P[X > x]}}
 }
 \value{
   The output values conform to the output from other such functions in \R. \code{dJohnson()} gives the density, \code{pJohnson()} the distribution function and \code{qJohnson()} its inverse. \code{rJohnson()} generates random numbers. \code{sJohnson()} produces a list containing parameters corresponding to the arguments -- mean, median, mode, variance, sd, third cental moment, fourth central moment, Pearson's skewness, skewness, and kurtosis.
 \cr
-
 \code{moments()} calculates the moment statistics of x as a vector with elements (mu, sigma, skew, kurt), where mu is the mean of x, sigma the SD of x with divisor \code{length(x)}, skew is the skewness and kurt the kurtosis. 
 \cr
-
-\code{JohnsonFit()} outputs a list containing the Johnson parameters (gamma, delta, xi, lambda, type), where type is one of the Johnson types: "SN", "SL", "SB", or "SU". \code{JohnsonFit()} does this by default using 5 order statistics, but when moment=TRUE it does this by using the first four moments of x calculated by the function \code{moments()}. 
+	\code{JohnsonFit()} outputs a list containing the Johnson parameters (gamma, delta, xi, lambda, type), where type is one of the Johnson types: "SN", "SL", "SB", or "SU". \code{JohnsonFit()} does this using 5 order statistics when moment="quant", when moment="find" it does this by using the first four moments of t calculated by the function \code{moments()}, when moment="use" it assumes that the vector t is [mean,m2,m3,m4], where mi is the ith moment about the mean. 
 \cr
-
 Fitting by moments is difficult numerically and often \code{JohnsonFit()} will report an error.
 }
 
@@ -83,10 +81,12 @@ pJohnson(1,parms)
 parms2<-JohnsonFit(rexp(50))
 qJohnson(p=0.5,list(parms,parms2))
 
-## JohnsonFit with moments=TRUE is not always possible, and even
-## when possible, may produce odd results.
+## JohnsonFit with moment="find" and moment="use" is not always possible,
+## and even when possible, may produce odd results.
+## parms<-JohnsonFit(x,moment="find")
 
-## parms<-JohnsonFit(x,moment=TRUE)
+parms<-JohnsonFit(c(0,1,-.5,4),moment="use")
+
 sJohnson(parms) 
 
 # Fit illustration

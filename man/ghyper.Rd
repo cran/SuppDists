@@ -28,7 +28,7 @@ sghyper(a, k, N)
 tghyper(a, k, N) ## scalar arguments only
 }
 \arguments{
-	\item{x,q}{vector of non-negative \bold{integer} quantities}
+	\item{x,q,n}{vector of non-negative \bold{integer} quantities}
 	\item{p}{vector of probabilities}
 	\item{a}{vector of real values giving the first column total}
 	\item{k}{vector  of real values giving the first row total}
@@ -37,10 +37,9 @@ tghyper(a, k, N) ## scalar arguments only
 	\item{lower.tail}{logical vector; if TRUE (default), probabilities are \eqn{P[X <= x]}, otherwise, \eqn{P[X > x]}}
 }
 \value{
-  The output values conform to the output from other such functions in R. \code{dghyper()} gives the density, \code{pghyper()} the distribution function and \code{qghyper()} its inverse. \code{rghyper()} generates random numbers. \code{sghyper()} produces a list containing parameters corresponding to the arguments -- mean, median, mode, variance, sd, third cental moment, fourth central moment, Pearson's skewness, skewness, and kurtosis.\cr
-
-	The function \code{tghyper()} returns the hypergeometric type and the range of values for x.\cr
-	
+  The output values conform to the output from other such functions in R. \code{dghyper()} gives the density, \code{pghyper()} the distribution function and \code{qghyper()} its inverse. \code{rghyper()} generates random numbers. \code{sghyper()} produces a list containing parameters corresponding to the arguments -- mean, median, mode, variance, sd, third cental moment, fourth central moment, Pearson's skewness, skewness, and kurtosis.
+\cr
+	The function \code{tghyper()} returns the hypergeometric type and the range of values for x.	
 }
 
 
@@ -49,10 +48,9 @@ tghyper(a, k, N) ## scalar arguments only
 The basic representation is in terms of a two-way table:
 
 \tabular{ccc}{
-x \tab  k-x \tab  k \cr
-a-x \tab  b-k+x \tab  N-k \cr
-  a \tab     b \tab  N
-}
+x \tab  k-x \tab  k\cr
+a-x \tab  b-k+x \tab  N-k\cr
+a \tab     b \tab  N}
 
 and the associated hypergeometric probability \eqn{P(x)=C_x^a C_{k-x}^b / C_k^N}{P(x)=choose(a, x) choose(b, k-x) / choose(N, k)}.
 

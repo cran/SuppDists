@@ -54,7 +54,7 @@ Exact calculations are made for the following values of the parameters:
 	2 \tab 100 \cr
 	3 \tab 30 \cr
 	4 \tab 15 \cr
-	5 \tab 8 \cr
+	5 \tab 8 
 }
 These exact calculations are made using the algorithm of Kendall and Smith (1939). 
 

@@ -164,10 +164,11 @@ function (x, r, log = FALSE)
     value
 }
 JohnsonFit <-
-function (x, moment = FALSE) 
+function (t, moment = "quant")
 {
-    if (moment) {
-        mom <- moments(x)
+    firstChar=substring(moment,1,1)
+    if (firstChar=="f") {
+        mom <- moments(t)
         mu <- mom[[1]]
         sigma <- mom[[2]]
         skew <- mom[[3]]
@@ -177,8 +178,18 @@ function (x, moment = FALSE)
             delta = double(1), xi = double(1), lambda = double(1), 
             type = integer(1))
     }
-    else {
-        input <- quantile(x, probs = c(0.05, 0.206, 0.5, 0.794, 
+    else if (firstChar=="u") {
+      mu<-t[1]
+      sigma<-sqrt(t[2])
+      skew<-t[3]/sigma^3
+      kurt<-(t[4]/t[2]^2)-3
+      value <- .C("JohnsonMomentFitR", as.double(mu), as.double(sigma), 
+          as.double(skew), as.double(kurt), gamma = double(1), 
+          delta = double(1), xi = double(1), lambda = double(1), 
+          type = integer(1))
+     }
+    else if (firstChar=="q") {
+        input <- quantile(t, probs = c(0.05, 0.206, 0.5, 0.794, 
             0.95), names = FALSE)
         x5 <- input[[1]]
         x20.6 <- input[[2]]
@@ -190,6 +201,7 @@ function (x, moment = FALSE)
             gamma = double(1), delta = double(1), xi = double(1), 
             lambda = double(1), type = integer(1))
     }
+    else return(NA)
     types <- c("SN", "SL", "SU", "SB")
     list(gamma = value$gamma, delta = value$delta, xi = value$xi, 
         lambda = value$lambda, type = types[value$type])

@@ -29,7 +29,7 @@ sSpearman(r)
 
 \deqn{1-\frac{6d}{r(r^2-1)}}{1-6 d /(r(r^2-1))}
 
-This is, in fact, the product-moment correlation coefficient of rank differences.  See Kendall (1975), Chapter 2. It is identical to Friedman's chi-squared for two treatments scaled to the -1, 1 range -- if X is the Friedman statistic, then \eqn{\rho=frac{X}{r-1)-1}{rho = X/(r-1) -1}.
+This is, in fact, the product-moment correlation coefficient of rank differences.  See Kendall (1975), Chapter 2. It is identical to Friedman's chi-squared for two treatments scaled to the -1, 1 range -- if X is the Friedman statistic, then \eqn{\rho=frac{X}{r-1)-1}}{rho = X/(r-1) -1}.
 
 Exact calculations are made for \eqn{r \le 100}{r <= 100}
 

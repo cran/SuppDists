@@ -34,15 +34,15 @@ sinvGauss(nu, lambda)
 
 Probability functions:
 
-\deqn{f(x,\mu,\lambda)=\sqrt{\frac{\lambda}{2\pi x^3}}\exp\left[-\lambda\frac{(x-\mu^2}{2\mu^2 x}\right] \mbox{-- the density}}{f(x,mu,lambda)=sqrt[lambda/(2 pi x^3)]exp[-lambda(x-mu^2)/(2 x mu^2)] -- the density
+\deqn{f(x,\nu,\lambda)=\sqrt{\frac{\lambda}{2\pi x^3}}\exp\left[-\lambda\frac{(x-\nu)^2}{2\nu^2 x}\right] \mbox{-- the density}}{f(x,nu,lambda)=sqrt[lambda/(2 pi x^3)]exp[-lambda(x-nu)^2/(2 x nu^2)] -- the density
 }
 
-\deqn{F(x,\mu,\lambda)=\Phi\left[\sqrt{\frac{\lambda}{x}}\left(\frac{x}{\mu}-1\right)\right]+e^{2\lambda/\mu}\Phi\left[\sqrt{\frac{\lambda}{x}}\left(\frac{x}{\mu}+1\right)\right] \mbox{-- the distribution function}}{F(x,mu,lambda)=Phi[sqrt(lambda/x)((x/mu)-1)]+exp(2*lambda/mu)*Phi[sqrt(lambda/x)((x/mu)+1)] -- the distribution function}
+\deqn{F(x,\nu,\lambda)=\Phi\left[\sqrt{\frac{\lambda}{x}}\left(\frac{x}{\nu}-1\right)\right]+e^{2\lambda/\nu}\Phi\left[\sqrt{\frac{\lambda}{x}}\left(\frac{x}{\nu}+1\right)\right] \mbox{-- the distribution function}}{F(x,nu,lambda)=Phi[sqrt(lambda/x)((x/nu)-1)]+exp(2*lambda/nu)*Phi[sqrt(lambda/x)((x/nu)+1)] -- the distribution function}
 
 where \eqn{\Phi[]}{Phi[]} is the standard normal distribution function.
 
 
-The calculations are accurate to at least seven significant figures over an extended range - much larger than that of any existing tables. We have tested them for \eqn{\lambda / \mu = 10e-20}{(lambda/mu)=10e-20}, and \eqn{\lambda/\mu=10e4}{lambda / mu = 10e4}. Accessible tables are those of Wassan and Roy (1969), which unfortunately, are sometimes good to only two significant digits. Much better tables are available in an expensive CRC Handbook (1989) – these tables are accurate to at least 7 significant digits for \eqn{\lambda/\mu \ge 0.02}{lambda / mu >= 0.02} to \eqn{\lambda/\mu \le 4000}{lambda / mu <= 4000}. 
+The calculations are accurate to at least seven significant figures over an extended range - much larger than that of any existing tables. We have tested them for \eqn{\lambda / \nu = 10e-20}{(lambda/nu)=10e-20}, and \eqn{\lambda/\nu=10e4}{lambda / nu = 10e4}. Accessible tables are those of Wassan and Roy (1969), which unfortunately, are sometimes good to only two significant digits. Much better tables are available in an expensive CRC Handbook (1989) – these tables are accurate to at least 7 significant digits for \eqn{\lambda/\nu \ge 0.02}{lambda / nu >= 0.02} to \eqn{\lambda/\nu \le 4000}{lambda / nu <= 4000}. 
 
 
 
