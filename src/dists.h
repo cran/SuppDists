@@ -247,7 +247,7 @@ void rhypergeometric(double* randArray,int n,int a,int m,int N);
 
 void sghyper(double a,double m,double N,double *mean,double *median,double *mode,double *variance,double *third,double *fourth,hyperType variety);
 
-DISTS_API void tghyperR(double *ap,double *mp,double *Np,int *leng,char **aString);
+DISTS_API void tghyperR(double *ap,double *mp,double *Np,char **aString);
 DISTS_API void pghyperR(int *kp,double *ap,double *np,double *Np,int *Mp,double *valuep);
 DISTS_API void ughyperR(int *kp,double *ap,double *np,double *Np,int *Mp,double *valuep);
 DISTS_API void qghyperR(double *pp,double *ap,double *np,double *Np,int *Mp,double *valuep);

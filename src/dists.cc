@@ -4383,8 +4383,11 @@ static double fcorrelationP(double r){return fcorrelation(r,grhocorr,gNcorr);}
 		return NA_REAL;
 
 	P=Integral(-1.0,r,fcorrelationP,3e-8);
-	if (P<0 || P>1)
+	if (P<-0.0001 || P>1.0001)
 		return NA_REAL;
+	if (P<0) P=0;
+	if (P>1) P=1;
+
 	return P;
 }
 
@@ -4807,7 +4810,6 @@ DISTS_API void tghyperR(
 	double *ap, 				// Sample size
 	double *mp,      	// Total number of marked items
 	double *Np,       		// Total number of items
-	int *leng,
 	char **aString
 )
 {
@@ -4820,38 +4822,37 @@ DISTS_API void tghyperR(
 
 	switch (variety) {
 		case classic:
-			sprintf(*aString,"type = %s -- %d <= x <= %d",hyperNames[(int)classic],maxm(0,(int)(a+m-N)),minm((int)a,(int)m));
+			snprintf(*aString,127,"type = %s -- %d <= x <= %d",hyperNames[(int)classic],maxm(0,(int)(a+m-N)),minm((int)a,(int)m));
 			break;
 
 		case IAi:
-			sprintf(*aString,"type = %s -- 0 <= x <= %d",hyperNames[(int)IAi],(int)m);
+			snprintf(*aString,127,"type = %s -- 0 <= x <= %d",hyperNames[(int)IAi],(int)m);
 			break;
 		case IAii:
-			sprintf(*aString,"type = %s -- 0 <= x <= %d",hyperNames[(int)IAii],(int)a);
+			snprintf(*aString,127,"type = %s -- 0 <= x <= %d",hyperNames[(int)IAii],(int)a);
 			break;
 		case IB:		// Specified 1.0<N to avoid problems with small parameters
-			sprintf(*aString,"type = %s -- x = 0,1,2,...",hyperNames[(int)IB]);
+			snprintf(*aString,127,"type = %s -- x = 0,1,2,...",hyperNames[(int)IB]);
 			break;
 		case IIA:
-			sprintf(*aString,"type = %s -- 0 <= x <= %d",hyperNames[(int)IIA],(int)m);
+			snprintf(*aString,127,"type = %s -- 0 <= x <= %d",hyperNames[(int)IIA],(int)m);
 			break;
 		case IIB:
-			sprintf(*aString,"type = %s -- x = 0,1,2,...",hyperNames[(int)IIB]);
+			snprintf(*aString,127,"type = %s -- x = 0,1,2,...",hyperNames[(int)IIB]);
 			break;
 		case IIIA:
-			sprintf(*aString,"type = %s -- 0 <= x <= %d",hyperNames[(int)IIIA],(int)a);
+			snprintf(*aString,127,"type = %s -- 0 <= x <= %d",hyperNames[(int)IIIA],(int)a);
 			break;
 		case IIIB:
-			sprintf(*aString,"type = %s -- x = 0,1,2,...",hyperNames[(int)IIIB]);
+			snprintf(*aString,127,"type = %s -- x = 0,1,2,...",hyperNames[(int)IIIB]);
 			break;
 		case IV:
-			sprintf(*aString,"type = %s -- x = 0,1,2,...",hyperNames[(int)IV]);
+			snprintf(*aString,127,"type = %s -- x = 0,1,2,...",hyperNames[(int)IV]);
 			break;
 		case noType:
-			sprintf(*aString,"type = %s",hyperNames[(int)noType]);
+			snprintf(*aString,127,"type = %s",hyperNames[(int)noType]);
 	}
 
-	*leng=strlen(*aString);
 
 }
 

@@ -1004,8 +1004,7 @@ function (r)
 tghyper <-
 function (a, k, N) 
 {
-    leng <- 0
     value <- .C("tghyperR", as.double(a), as.double(k), as.double(N), 
-        as.integer(leng), strn = character(128))
-    value$strn[1:leng]
+        strn =paste(rep(" ", 128), collapse="")  )
+	value$strn
 }
