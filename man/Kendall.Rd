@@ -32,7 +32,7 @@ sKendall(N)
 There are two categories with N treatments each.  The treatments are ranked for each category, and then sorted according to the ranks for the first category.  This produces a 2 by N array in which the numbers in the first row are increasing from 1 to N.  The array is scanned, and every time two adjacent ranks in the second row are not in order, they are exchanged.  The scanning is repeated until the second row is in increasing order.  Let s denote the number of exchanges, then Kendall's tau is given by
 
 \deqn{\tau=1-\frac{4s}{N(N-1)}}{tau=1-4 s/(N (N-1))}
-}
+
 
 This too is a product-moment correlation coefficient.  See Kendall (1975), Chapter 2.  Other methods for calculating the statistic are also discussed there.
 
