@@ -1,7 +1,7 @@
 #define DISTS_API extern "C"
 
 enum hyperType {
-	clasic,
+	classic,
 	IAi,
 	IAii,
 	IB,

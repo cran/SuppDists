@@ -3434,7 +3434,7 @@ DISTS_API momentsR(
 	double *data,
 	int *Np,
 	double *meanp,
-	double *variancep, // n not (n-1) divisor used
+	double *variancep, // n ! (n-1) divisor used
 	double *thirdp,
 	double *fourthp
 )
@@ -4713,7 +4713,7 @@ hyperType typeHyper(
 
 
 	if (0.0<a && 0.0<N && 0.0<m &&  isint(a) && isint(N) && isint(m)) {
-		variety=clasic;
+		variety=classic;
 	}
 
 	else
@@ -4768,7 +4768,7 @@ bool checkHyperArgument(
 {
 
 	switch (variety) {
-		case clasic:
+		case classic:
 			return (maxm(0,(int)(a+m-N))<=k && k<=minm((int)a,(int)m));
 			break;
 		case IAi:
@@ -4819,8 +4819,8 @@ DISTS_API void tghyperR(
 
 
 	switch (variety) {
-		case clasic:
-			sprintf(*aString,"type = %s -- %d <= x <= %d",hyperNames[(int)clasic],maxm(0,(int)(a+m-N)),minm((int)a,(int)m));
+		case classic:
+			sprintf(*aString,"type = %s -- %d <= x <= %d",hyperNames[(int)classic],maxm(0,(int)(a+m-N)),minm((int)a,(int)m));
 			break;
 
 		case IAi:
@@ -4870,7 +4870,7 @@ DISTS_API void dghyperR(
 
 	for (i=0;i<M;i++) {
 		variety=typeHyper(ap[i],np[i],Np[i]);
-		if (variety==clasic)
+		if (variety==classic)
 			valuep[i]=fhypergeometric(kp[i],(int)ap[i],(int)np[i],(int)Np[i]);
 		else if (variety!=noType)
 			valuep[i]=fgenhypergeometric(kp[i],ap[i],np[i],Np[i],variety);
@@ -4936,7 +4936,7 @@ DISTS_API void pghyperR(
 		variety=typeHyper(ap[i],np[i],Np[i]);
 		if (! checkHyperArgument(kp[i],ap[i],np[i],Np[i],variety))
 			valuep[i]=NA_REAL;
-		else if (variety==clasic)
+		else if (variety==classic)
 			valuep[i]=phypergeometric(kp[i],(int)ap[i],(int)np[i],(int)Np[i]);
 		else
 			valuep[i]=pgenhypergeometric(kp[i],ap[i],np[i],Np[i],variety);
@@ -5032,7 +5032,7 @@ DISTS_API void ughyperR(
 		variety=typeHyper(ap[i],np[i],Np[i]);
 		if (! checkHyperArgument(kp[i],ap[i],np[i],Np[i],variety))
 			valuep[i]=NA_REAL;
-		else if (variety==clasic)
+		else if (variety==classic)
 			valuep[i]=qhypergeometric(kp[i],(int)ap[i],(int)np[i],(int)Np[i]);
 		else
 			valuep[i]=qgenhypergeometric(kp[i],ap[i],np[i],Np[i],variety);
@@ -5067,7 +5067,7 @@ DISTS_API void qghyperR(
 
 	for (i=0;i<M;i++) {
 		variety=typeHyper(ap[i],np[i],Np[i]);
-		if (variety==clasic)
+		if (variety==classic)
 			valuep[i]=xhypergeometric(pp[i],(int)ap[i],(int)np[i],(int)Np[i]);
 		else if (variety!=noType)
 			valuep[i]=xgenhypergeometric(pp[i],ap[i],np[i],Np[i],variety);
@@ -5140,7 +5140,7 @@ DISTS_API void rghyperR(
 
 	if (K==1) {
 		variety=typeHyper(*ap,*np,*Np);
-		if (variety==clasic)
+		if (variety==classic)
 			rhypergeometric(valuep,M,(int)*ap,(int)*np,(int)*Np);
 		else if (variety!=noType)
 			rgenhypergeometric(valuep,M,*ap,*np,*Np,variety);
@@ -5153,7 +5153,7 @@ DISTS_API void rghyperR(
 		loc=0;
 		for (j=0;j<K;j++) {
 			variety=typeHyper(ap[j],np[j],Np[j]);
-			if (variety==clasic)
+			if (variety==classic)
 				rhypergeometric(tArray,D,(int)ap[j],(int)np[j],(int)Np[j]);
 			else if (variety!=noType)
 				rgenhypergeometric(tArray,D,ap[j],np[j],Np[j],variety);
@@ -5261,7 +5261,7 @@ void sghyper(
 			*third=NA_REAL;
 			*fourth=NA_REAL;
 			break;
-		case clasic:
+		case classic:
 			n=minm(m,a);
 			A=maxm(m,a);
 			B=N-maxm(m,a);

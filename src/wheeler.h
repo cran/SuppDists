@@ -9,9 +9,6 @@
 #define UINT unsigned int
 #define ULONG unsigned long
 
-#define not !
-#define and &&
-#define or ||
 #define equals ==
 #define repeat do {
 #define until(A) }while(!(A))
