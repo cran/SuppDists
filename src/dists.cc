@@ -115,7 +115,7 @@ DISTS_API void dinvGaussR(
 	double delta=x/mu-1.0;
 	double ratio=lambda/x;
 	
-	if (x<=0 or mu<=0 or lambda<=0)
+	if (x<=0 || mu<=0 || lambda<=0)
 		return NA_REAL;
 
 	return sqrt(ratio/(TWOPI*x*x))*exp(-0.5*ratio*delta*delta);
@@ -154,7 +154,7 @@ double pinvGauss(
 	double p1=pnorm(a*(b-1.0),0,1,true,false);
 	double p2=pnorm(-a*(b+1.0),0,1,true,false);
 
-	if (x<=0 or mu<=0 or lambda<=0)
+	if (x<=0 || mu<=0 || lambda<=0)
 		return NA_REAL;
 
 	if (p2 equals 0.0) {
@@ -198,7 +198,7 @@ DISTS_API void uinvGaussR(
 	double q=1.0-pnorm(a*(b-1.0),0,1,true,false);
 	double p=pnorm(-a*(b+1.0),0,1,true,false);
 
-	if (x<=0 or mu<=0 or lambda<=0)
+	if (x<=0 || mu<=0 || lambda<=0)
 		return NA_REAL;
 
 	if (p equals 0.0) {
@@ -259,7 +259,7 @@ static double finvGaussP(double x){return finvGauss(x,gMu,gLambda);}
 	gLambda=lambda;
 	gP=p;
 
-	if (0>p or p>1 or mu<=0 or lambda<=0)
+	if (0>p || p>1 || mu<=0 || lambda<=0)
 		return NA_REAL;
 
 //	double mode=-1.5*(mu*mu)/lambda+mu*sqrt(1.0+2.25*(mu*mu)/(lambda*lambda));
@@ -344,7 +344,7 @@ DISTS_API void rinvGaussR(
 	rgauss(normArray,n,0,1);
 	GetRNGstate();
 	for (int i=0;i<n;i++) {
-		if (mu<=0 or lambda<=0) {
+		if (mu<=0 || lambda<=0) {
 			normArray[i]=NA_REAL;
 		}
 		else {
@@ -378,7 +378,7 @@ double loggamma(double x)	 {
 
 	double f;
 
-	if (x equals 1.0 or x equals 2.0) {
+	if (x equals 1.0 || x equals 2.0) {
 		return 0.0;
 	}
 
@@ -531,7 +531,7 @@ DISTS_API void pKruskalWallisR(
 	double C=c;
 	double N=n;
 
-	if (H<0.0 or U<=0 or U>KruskalWallisMaxU(c,n))
+	if (H<0.0 || U<=0 || U>KruskalWallisMaxU(c,n))
 		return NA_REAL;
 	double V=(doNormalScore)?varNormalScores(N,C,U):varKruskal_Wallis(N,C,U);
 	double d=((N-C)*(C-1.0)-V)/((N-1.0)*V);
@@ -568,7 +568,7 @@ DISTS_API void uKruskalWallisR(
 )
 {
 
-	if (H<0.0 or U<=0 or U>KruskalWallisMaxU(c,n))
+	if (H<0.0 || U<=0 || U>KruskalWallisMaxU(c,n))
 		return NA_REAL;
 
    return 1.0-pKruskal_Wallis(H,c,n,U,doNormalScore);
@@ -602,7 +602,7 @@ DISTS_API void qKruskalWallisR(
 	double C=c;
 	double N=n;
 	
-	if (0>P or P>1 or U<=0 or U>KruskalWallisMaxU(c,n))
+	if (0>P || P>1 || U<=0 || U>KruskalWallisMaxU(c,n))
 		return NA_REAL;
 
 
@@ -632,7 +632,7 @@ DISTS_API void sKruskalWallisR(
 
 	for (i=0;i<N;i++) {
 		sKruskal_Wallis(cp[i],np[i],Up[i],(bool)doNormalScorep[i],modep+i,thirdp+i,fourthp+i);
-		if (Up[i]<=0 or Up[i]>KruskalWallisMaxU(cp[i],np[i])){
+		if (Up[i]<=0 || Up[i]>KruskalWallisMaxU(cp[i],np[i])){
 			varp[i]=NA_REAL;
 		}
 		else {
@@ -945,7 +945,7 @@ DISTS_API void pKendallR(
 	int k=(int)(.5+(1.0+tau)*mean);
 	double t=(double)k;
 
-	if (tau>1 or tau <-1 or ni<2)
+	if (tau>1 || tau <-1 || ni<2)
 		return NA_REAL;
 
 	if (k<0L) {
@@ -1038,7 +1038,7 @@ DISTS_API void dKendallR(
 	int k=(int)(.5+(1.0+tau)*mean);
 	double t=(double)k;
 
-	if (tau>1 or tau <-1)
+	if (tau>1 || tau <-1)
 	return NA_REAL;
 
 	if (k<0L) {
@@ -1098,7 +1098,7 @@ double  qkendall(
 	double tau
 )
 {
-	if (tau>1 or tau <-1 or n<2)
+	if (tau>1 || tau <-1 || n<2)
 		return NA_REAL;
 
    return (1.0-pkendall(n,tau));
@@ -1133,22 +1133,22 @@ DISTS_API void qKendallR(
 	double tau=4.0*(double)k/(n*(n-1.0))-1.0;
 	bool larger=(pr<=pkendall(ni,tau));
 
-	if (0>=pr or pr>=1 or ni<2)
+	if (0>=pr || pr>=1 || ni<2)
 		return NA_REAL;
 
 
 	while (larger) {
-		if (not k) {
+		if (! k) {
 			goto theExit;
 		}
 		tau=4.0*(double)(--k)/(n*(n-1.0))-1.0;
 		larger=(pr<=pkendall(ni,tau));
-		if (not larger) {
+		if (! larger) {
 			++k;
 			goto theExit;
 		}
 	}
-	while (not larger) {
+	while (! larger) {
 		tau=4.0*(double)(++k)/(n*(n-1.0))-1.0;
 		larger=(pr<=pkendall(ni,tau));
 		if (larger) {
@@ -1268,7 +1268,7 @@ DISTS_API void pmaxFratioR(
 	int N	// Number of mean squares
 )
 {
-	if (F<=0 or df<1 or N<1)
+	if (F<=0 || df<1 || N<1)
 		return NA_REAL;
 
 	if (N equals 2) {
@@ -1361,7 +1361,7 @@ DISTS_API void umaxFratioR(
 	int N	// Number of mean squares
 )
 {
-	if (F<=0 or df<1 or N<1)
+	if (F<=0 || df<1 || N<1)
 		return NA_REAL;
 
 	return 1.0-pmaxfratio(F,df,N);
@@ -1410,7 +1410,7 @@ DISTS_API void dmaxFratioR(
 	int N	// Number of mean squares
 )
 {
-	if (F<=0 or dgf<1 or N<1)
+	if (F<=0 || dgf<1 || N<1)
 		return NA_REAL;
 
 	if (N equals 2) {
@@ -1540,7 +1540,7 @@ DISTS_API void qmaxFratioR(
 	int N
 )
 {
-	if (p<0 or p>1 or dgf<1 or N<1)
+	if (p<0 || p>1 || dgf<1 || N<1)
 		return NA_REAL;
 
 	// This dist is a folded F
@@ -1549,7 +1549,7 @@ DISTS_API void qmaxFratioR(
 	}
 
 		// Can actually do a little better, especiall for larger df, but this is safe
-	if (dgf>160 or N>24)
+	if (dgf>160 || N>24)
 		return NA_REAL;
 
 	JohnsonParms parms=GetClosestJohnsonParms(dgf,N);
@@ -1570,7 +1570,7 @@ DISTS_API void qmaxFratioR(
 			x-=h;
 		}
 		ho=fabs(h);
-    until(m++>MAXFITER or not more);
+    until(m++>MAXFITER || ! more);
 
 		// The max F Ratio must be at least 1
 	if (x<1.0) {
@@ -1594,7 +1594,7 @@ void rmaxFratio(
 	double minV;
 
 	for (i=0;i<N;i++) {
-		if (df<1 or n<1) {
+		if (df<1 || n<1) {
 			randomArray[i]=NA_REAL;
 		}
 		else {
@@ -1703,7 +1703,7 @@ void smaxFratio(
 	gdf=df;
 	gk=N;
 
-	if (df<1 or N<1) {
+	if (df<1 || N<1) {
 		*mean=NA_REAL;
 		*median=NA_REAL;
 		*mode=NA_REAL;
@@ -1949,7 +1949,7 @@ static bool IsSameType(
 		}
 	}
 
-	if (not sameType) {
+	if (! sameType) {
 		for (i=0;i<r;i++) {
 			R2[i]=-R2[i];
 		}
@@ -2361,7 +2361,7 @@ bool DoExactFriedman(
 )
 {
 	if (doRho) {  // Spearman's rho -- see limit comment below
-		return (1<r and r<12);
+		return (1<r && r<12);
 	}
 	else {
 			// These limits can be made larger, but run time becomes excessive
@@ -2406,24 +2406,24 @@ static int FriedmanFindS(
 			return k;
 		}
 		else
-		if (not lower and SS equals S[k]) {
+		if (! lower && SS equals S[k]) {
 			return k;
 		}
 		else {
 			larger=S[--k]>SS;
-			if (not larger) {
+			if (! larger) {
 				return (lower)?++k:k;
 			}
 		}
 	}
-	while (not larger) {
+	while (! larger) {
 		if (k equals nS-1) {
 			return k;
 		}
 		else {
 			larger=(lower)?S[++k]>SS:S[++k]>=SS;
 			if (larger) {
-				if (lower or S[k] equals SS) {
+				if (lower || S[k] equals SS) {
 					return k;
 				}
 				else {
@@ -2464,7 +2464,7 @@ static bool CheckFriedmanExactQ(
 )
 {
 	if (DoExactFriedman(r,n,doRho)) {
-		if (not FriedmanCurrentGlobal or FriedmanCurrentGlobal->r!=r or
+		if (! FriedmanCurrentGlobal || FriedmanCurrentGlobal->r!=r ||
 			FriedmanCurrentGlobal->n!=n) {
 				if (FriedmanCurrentGlobal) {
 					ClearFriedmanGlobal(false);	 // Delete current S and theDist
@@ -2516,7 +2516,7 @@ static bool CheckFriedmanExactF(
 )
 {
 	if (DoExactFriedman(r,n,doRho)) {
-		if (not FriedmanCurrentGlobal or FriedmanCurrentGlobal->r!=r or
+		if (! FriedmanCurrentGlobal || FriedmanCurrentGlobal->r!=r ||
 			FriedmanCurrentGlobal->n!=n) {
 				if (FriedmanCurrentGlobal) {
 					ClearFriedmanGlobal(false);	 // Delete current S and theDist
@@ -2594,7 +2594,7 @@ DISTS_API void pFriedmanR(
 
 	if (doRho)
 		n=2;
-	if (r<3 or n<2)
+	if (r<3 || n<2)
 		return NA_REAL;
 
 	double M=(double)(n*n*r*(r*r-1))/12.0;	// Max value of S
@@ -2606,7 +2606,7 @@ DISTS_API void pFriedmanR(
 		S=(X*(double)(n*r*(r+1)))/12.0;	// X to S
 	}
 
-	if (S>M or S<0)
+	if (S>M || S<0)
 		return NA_REAL;
 
 	long iS=(long)ceil(S); // Round up to even, because S values must be even
@@ -2653,7 +2653,7 @@ DISTS_API void uFriedmanR(
 
 	if (doRho)
 		n=2;
-	if (r<3 or n<2)
+	if (r<3 || n<2)
 		return NA_REAL;
 
 
@@ -2666,7 +2666,7 @@ DISTS_API void uFriedmanR(
 		S=(X*(double)(n*r*(r+1)))/12.0;	// X to S
 	}
 
-	if (S>M or S<0)
+	if (S>M || S<0)
 		return NA_REAL;
 
 
@@ -2746,7 +2746,7 @@ DISTS_API void dFriedmanR(
 
 	if (doRho)
 		n=2;
-	if (r<3 or n<2)
+	if (r<3 || n<2)
 		return NA_REAL;
 
 	double M=(double)(n*n*r*(r*r-1))/12.0;	// Max value of S
@@ -2758,7 +2758,7 @@ DISTS_API void dFriedmanR(
 		S=(X*(double)(n*r*(r+1)))/12.0;	// X to S
 	}
 
-	if (S>M or S<0)
+	if (S>M || S<0)
 		return NA_REAL;
 
 
@@ -2810,7 +2810,7 @@ double  xfrie(
 {
 	if (doRho)
 		 n=2;
-	if (r<3 or n<2)
+	if (r<3 || n<2)
 		return NA_REAL;
 
 		// Initial guess
@@ -2822,7 +2822,7 @@ double  xfrie(
 	long iS=(long)ceil(S);
 
 
-	if (0>P or P>1)
+	if (0>P || P>1)
 		return NA_REAL;
 
 	iS=2*(iS/2);  // Round up to even, because S values must be even
@@ -2850,12 +2850,12 @@ double  xfrie(
 		}
 		else
 			larger=(P<=pfrie(X,r,n,false));
-		if (not larger) {
+		if (! larger) {
 			X+=step;
 			goto theEnd;
 		}
 	}
-	while (not larger) {
+	while (! larger) {
 		if (X+step >= MX) {
 			X=MX;
 			goto theEnd;
@@ -2948,7 +2948,7 @@ double medianfrie(
 	int n
 )
 {
-	if (not DoExactFriedman(r,n,false)) {
+	if (! DoExactFriedman(r,n,false)) {
 		return xfrie(0.5,r,n,false);	// continuous approx
 	}
 	else {
@@ -2988,7 +2988,7 @@ DISTS_API void sFriedmanR(
 	int i;
 
 	for (i=0;i<N;i++) {
-		if (rp[i]<3 or (not rhop[i] and np[i]<2)) {
+		if (rp[i]<3 || (! rhop[i] && np[i]<2)) {
 			meanp[i]=NA_REAL;
 			medianp[i]=NA_REAL;
 			modep[i]=NA_REAL;
@@ -3114,7 +3114,7 @@ void JohnsonMomentSu(
 			v=w*w;
 			w=sqrt(1.0-2.0*(1.5-B2+(B1*(B2-1.5-v*(1.0+0.5*v)))/z));	
 			w=sqrt(w-1.0);
-		until(fabs(B1-z)<=TOLSU or count++>100);
+		until(fabs(B1-z)<=TOLSU || count++>100);
 		if (count>100) {
 			error("\nToo many iterations");
 			return;
@@ -3207,7 +3207,7 @@ bool JohnsonMOM(
 			t+=f;
 			bool bL=t>expB;
 			double s=0;
-			if (not bL) {
+			if (! bL) {
 				s=exp(t)+1.0;
 			}
 			double p=exp(-v);
@@ -3221,7 +3221,7 @@ bool JohnsonMOM(
 				if (aa equals ab) {
 					break;
 				}
-				if (not bL) {
+				if (! bL) {
 					q/=s;
 					ab=aa;
 					aa=aa+q;
@@ -3241,7 +3241,7 @@ bool JohnsonMOM(
 				}
 			}
 
-		 until(not more or countInner++>iterLimit);
+		 until(! more || countInner++>iterLimit);
 		 if (more) {
 		 	goto errExit;
 		 }
@@ -3259,8 +3259,8 @@ bool JohnsonMOM(
 			}
 		 } 
 
-	until(not more or count++>iterLimit);
-	if (not more) {
+	until(! more || count++>iterLimit);
+	if (! more) {
 		goto theExit;
 	}
 
@@ -3365,7 +3365,7 @@ bool JohnsonMomentSb(
 					for (int k=0;k<4;k++) {
 						double t=(double)k;
 						double s;
-						if (not j) {
+						if (! j) {
 							s=moments[k+1]-moments[k];	
 						}
 						else {
@@ -3389,21 +3389,21 @@ bool JohnsonMomentSb(
 
 					// New estimates of gamma and delta
 				gamma-=deltaGamma;
-				if (B1 equals 0.0 or gamma<0.0) {
+				if (B1 equals 0.0 || gamma<0.0) {
 					gamma=0.0;
 				}
 				delta-=deltaDelta;
 				deltaGamma=fabs(deltaGamma);
 				deltaDelta=fabs(deltaDelta);
-				more=(deltaGamma>tTol or deltaDelta>tTol);
+				more=(deltaGamma>tTol || deltaDelta>tTol);
 					// error if iterates increase
-				errorSet=(deltaGamma>oldDeltaGamma or deltaDelta>oldDeltaDelta);
+				errorSet=(deltaGamma>oldDeltaGamma || deltaDelta>oldDeltaDelta);
 				oldDeltaGamma=deltaGamma;
 				oldDeltaDelta=deltaDelta;
  	  		}
 		}
-	until(not more or errorSet or count++>iterLimit);
-	if (not errorSet and not more) {
+	until(! more || errorSet || count++>iterLimit);
+	if (! errorSet && ! more) {
 		parms.delta=delta;
 		parms.lambda=sd/sqrt(h2);
 		if (negativeB1)	{
@@ -3521,7 +3521,7 @@ DISTS_API void JohnsonMomentFitR(
 	}
 
 		// Is it a normal ?
-	if (fabs(sqrtB1)<=TOLJ and fabs(B2-3.0)<=TOLJ) {
+	if (fabs(sqrtB1)<=TOLJ && fabs(B2-3.0)<=TOLJ) {
 		parms.type=SN;
 		parms.gamma=0.0;	// Hill et.al. let gamma delta carry the burden
 		parms.delta=1.0;
@@ -3647,7 +3647,7 @@ DISTS_API void JohnsonFitR(
 
 	tbu=tb/tu;
 			// Normal solution
-	if (fabs(fabs(tbu)-1.0)<TOLJN and fabs(fabs(t-1.0))<TOLJN) {  
+	if (fabs(fabs(tbu)-1.0)<TOLJN && fabs(fabs(t-1.0))<TOLJN) {  
 		solution=SN;
 		delta=1.0;
 		gamma=0.0;
@@ -3657,7 +3657,7 @@ DISTS_API void JohnsonFitR(
 	if (fabs(fabs(tbu)-1.0)<TOLJN) {  
 		solution=SL;
 		delta=zn/log(t);
-		if (not R_FINITE(delta)){
+		if (! R_FINITE(delta)){
 			error("\nInfinite value in SL fit");
 		}
 	}
@@ -3669,7 +3669,7 @@ DISTS_API void JohnsonFitR(
 		double b=tb+sqrt(tb*tb-1.0);
 		delta=zn/(2.0*log(b));
 		b*=b;
- 		if (t>b or t<1.0/b) {
+ 		if (t>b || t<1.0/b) {
 			error("\nBounded solution intermediate values out of range");
 		}
 		double a=(t-b)/(1-t*b);
@@ -3682,7 +3682,7 @@ DISTS_API void JohnsonFitR(
 		double b=tu+sqrt(tu*tu-1.0);
 		delta=zn/(2.0*log(b));
 		b*=b;
-		if (t>b or t<1.0/b) {
+		if (t>b || t<1.0/b) {
 			error("\nUnbounded solution intermediate values out of range");
 		}
 		double a=(1-t*b)/(t-b);
@@ -3782,7 +3782,7 @@ DISTS_API void pJohnsonR(
 				u=log(u);	
 			break;
 		case SB:
-				if (u<=0.0 or u>=1.0) {
+				if (u<=0.0 || u>=1.0) {
 					error("\nSb values out of range.");
 					return 0.0;
 				}
@@ -4310,7 +4310,7 @@ DISTS_API void dcorrR(
 
 	double n=(double)N;
 
-	if (N<3 or r<-1 or r>1 or rho<-1 or rho>1)
+	if (N<3 || r<-1 || r>1 || rho<-1 || rho>1)
 		return NA_REAL;
 
 
@@ -4337,7 +4337,7 @@ DISTS_API void dcorrR(
 		value=(double)(2*j-1);
 		term*=(0.25*(value*value)/(c+dj-1.0))*(x/dj);
 		j++;
-	until(sum+term equals sum or j>MAXITERATES);
+	until(sum+term equals sum || j>MAXITERATES);
 
 	return scale*exp(logFactor)*sum;
 }
@@ -4379,11 +4379,11 @@ static double fcorrelationP(double r){return fcorrelation(r,grhocorr,gNcorr);}
 	grhocorr=rho;
 	gNcorr=N;
 	
-	if (N<3 or r<-1 or r>1 or rho<-1 or rho>1)
+	if (N<3 || r<-1 || r>1 || rho<-1 || rho>1)
 		return NA_REAL;
 
 	P=Integral(-1.0,r,fcorrelationP,3e-8);
-	if (P<0 or P>1)
+	if (P<0 || P>1)
 		return NA_REAL;
 	return P;
 }
@@ -4409,7 +4409,7 @@ DISTS_API void ucorrR(
 	int N
 )
 { 	
-	if (N<3 or r<-1 or r>1 or rho<-1 or rho>1)
+	if (N<3 || r<-1 || r>1 || rho<-1 || rho>1)
 		return NA_REAL;
 	return 1.0-pcorrelation(r,rho,N);
 }
@@ -4446,7 +4446,7 @@ static double dcorrelationP(double r){return -gpcorr + pcorrelation(r,grhocorr,g
 	grhocorr=rho;
 	gNcorr=N;
 	
-	if (N<3 or p<0 or p>1 or rho<-1 or rho>1)
+	if (N<3 || p<0 || p>1 || rho<-1 || rho>1)
 		return NA_REAL;
 
 
@@ -4543,7 +4543,7 @@ DISTS_API void rcorrR(
 	double* x=(double *)S_alloc(n,sizeof(double));
 	double* y=(double *)S_alloc(n,sizeof(double));
 
-	if (n<3 or rho<-1 or rho>1) {
+	if (n<3 || rho<-1 || rho>1) {
 		for (int i=0;i<N;i++)
 			randArray[i]=NA_REAL;
 	}
@@ -4591,7 +4591,7 @@ DISTS_API void scorrR(
 	for (i=0;i<N;i++) {
 		rho=rhop[i];
 		n=np[i];
-		if (n<3 or rho<-1 or rho>1) {
+		if (n<3 || rho<-1 || rho>1) {
 			meanp[i]=NA_REAL;
 			medianp[i]=NA_REAL;
 			modep[i]=NA_REAL;
@@ -4678,16 +4678,16 @@ double PeizerHypergeometric(
 }
 
 char *hyperNames[]= {
-	"classic",
-	"IAi",
-	"IAii",
-	"IB",
-	"IIA",
-	"IIB",
-	"IIIA",
-	"IIIB",
-	"IV",
-	"no type"
+	(char *)"classic",
+	(char *)"IAi",
+	(char *)"IAii",
+	(char *)"IB",
+	(char *)"IIA",
+	(char *)"IIB",
+	(char *)"IIIA",
+	(char *)"IIIB",
+	(char *)"IV",
+	(char *)"no type"
 };
 
 	// Returns true if the double is an int
@@ -4712,43 +4712,43 @@ hyperType typeHyper(
 
 
 
-	if (0.0<a and 0.0<N and 0.0<m and  isint(a) and isint(N) and isint(m)) {
+	if (0.0<a && 0.0<N && 0.0<m &&  isint(a) && isint(N) && isint(m)) {
 		variety=clasic;
 	}
 
 	else
-	if (0.0<a and 0.0<N and 0.0<m and isint(m) and m-1.0<a and a<N-(m-1.0)) {
+	if (0.0<a && 0.0<N && 0.0<m && isint(m) && m-1.0<a && a<N-(m-1.0)) {
 		variety=IAi;
 	}
 	else
-	if (0.0<a and 0.0<N and 0.0<m and isint(a) and a-1.0<m and m<N-(a-1.0)) {
+	if (0.0<a && 0.0<N && 0.0<m && isint(a) && a-1.0<m && m<N-(a-1.0)) {
 		variety=IAii;
 	}
 	else
-	if (0.0<a and 0.0<N and 0.0<m and  not isint(a) and not isint(m) and a+m-1.0<N and
+	if (0.0<a && 0.0<N && 0.0<m &&  ! isint(a) && ! isint(m) && a+m-1.0<N &&
 		 		floor(a) equals floor(m)) {
 		variety=IB;		// Specified 1.0<N to avoid problems with small parameters
 	}
 	else
-	if (a<0.0 and N<a-1.0 and 0.0<m and isint(m))	{ //Kemp&Kemp use b<0 and b!=-1
+	if (a<0.0 && N<a-1.0 && 0.0<m && isint(m))	{ //Kemp&Kemp use b<0 && b!=-1
 		variety=IIA;
 	}
 	else
-	if (a<0.0 and -1.0<N and N<m+a-1.0 and 0.0<m and not isint(m) and 
+	if (a<0.0 && -1.0<N && N<m+a-1.0 && 0.0<m && ! isint(m) && 
 				floor(m) equals floor(m+a-1.0-N)) {
 		variety=IIB;
 	}
 	else
-	if (0.0<a and N<m-1.0 and m<0.0 and isint(a)) {
+	if (0.0<a && N<m-1.0 && m<0.0 && isint(a)) {
 		variety=IIIA;
 	}
 	else
-	if (0.0<a and -1.0<N and N<a+m-1.0 and m<0.0 and not isint(a) and 
+	if (0.0<a && -1.0<N && N<a+m-1.0 && m<0.0 && ! isint(a) && 
 				floor(a) equals floor(a+m-1.0-N)) {
 		variety=IIIB;
 	}
 	else
-	if (a<0.0 and -1.0<N and m<0.0) {  
+	if (a<0.0 && -1.0<N && m<0.0) {  
 		variety=IV;
 	}
 	else {
@@ -4769,25 +4769,25 @@ bool checkHyperArgument(
 
 	switch (variety) {
 		case clasic:
-			return (maxm(0,(int)(a+m-N))<=k and k<=minm((int)a,(int)m));
+			return (maxm(0,(int)(a+m-N))<=k && k<=minm((int)a,(int)m));
 			break;
 		case IAi:
-			return (0<=k and k<=(int)m);
+			return (0<=k && k<=(int)m);
 			break;
 		case IAii:
-			return (0<=k and k<=(int)a);
+			return (0<=k && k<=(int)a);
 			break;
 		case IB:		// Specified 1.0<N to avoid problems with small parameters
 			return (0<=k);
 			break;
 		case IIA:
-			return (0<=k and k<=(int)m);
+			return (0<=k && k<=(int)m);
 			break;
 		case IIB:
 			return (0<=k);
 			break;
 		case IIIA:
-			return (0<=k and k<=(int)a);
+			return (0<=k && k<=(int)a);
 			break;
 		case IIIB:
 			return (0<=k);
@@ -4934,7 +4934,7 @@ DISTS_API void pghyperR(
 
 	for (i=0;i<M;i++) {
 		variety=typeHyper(ap[i],np[i],Np[i]);
-		if (not checkHyperArgument(kp[i],ap[i],np[i],Np[i],variety))
+		if (! checkHyperArgument(kp[i],ap[i],np[i],Np[i],variety))
 			valuep[i]=NA_REAL;
 		else if (variety==clasic)
 			valuep[i]=phypergeometric(kp[i],(int)ap[i],(int)np[i],(int)Np[i]);
@@ -4952,7 +4952,7 @@ double phypergeometric(
 	int N       		// Total number of items
 )
 {
-	if (x<maxm(0,a-(N-n)) or x>minm(a,n)) 
+	if (x<maxm(0,a-(N-n)) || x>minm(a,n)) 
 		return NA_REAL;
 
 		// interchange n and a to get the fewest terms to sum
@@ -4986,7 +4986,7 @@ double phypergeometric(
 	}
 
 		// Use normal approximation if can't do it
-	if (not R_FINITE(logP)){
+	if (! R_FINITE(logP)){
 		double p=PeizerHypergeometric(x,a,n,N);
 		return lowerTail?p:1.0-p;
 	}
@@ -5000,7 +5000,7 @@ double phypergeometric(
 		sum+=term;
 	}
 		// Use normal aapproximation if can't do it
-	if (not R_FINITE(sum)){
+	if (! R_FINITE(sum)){
 		double p=PeizerHypergeometric(x,a,n,N);
 		return lowerTail?p:1.0-p;
 	}
@@ -5030,7 +5030,7 @@ DISTS_API void ughyperR(
 
 	for (i=0;i<M;i++) {
 		variety=typeHyper(ap[i],np[i],Np[i]);
-		if (not checkHyperArgument(kp[i],ap[i],np[i],Np[i],variety))
+		if (! checkHyperArgument(kp[i],ap[i],np[i],Np[i],variety))
 			valuep[i]=NA_REAL;
 		else if (variety==clasic)
 			valuep[i]=qhypergeometric(kp[i],(int)ap[i],(int)np[i],(int)Np[i]);
@@ -5094,7 +5094,7 @@ int  xhypergeometric(
 	x=maxm(x,minX);
 	x=minm(x,maxX);
 
-	if (0>p or p>1.)
+	if (0>p || p>1.)
 		error("\nProbability must be in the 0 to 1 range");
 
    	bool larger=(p<=phypergeometric(x,a,n,N));
@@ -5103,11 +5103,11 @@ int  xhypergeometric(
       		return x;
 		}
       	larger=(p<=phypergeometric(--x,a,n,N));
-      	if (not larger) {
+      	if (! larger) {
       		return ++x;
 		}
    	}
-    while (not larger){
+    while (! larger){
       	larger=(p<=phypergeometric(++x,a,n,N));
       	if (larger) {
       		return x;
@@ -5248,7 +5248,7 @@ void sghyper(
 			B=N-A;
 			paramSet=true;
 		case IIB:
-			if (not paramSet) {
+			if (! paramSet) {
 				A=minm(m,a);
 				n=maxm(m,a);
 				B=N-A;
@@ -5268,7 +5268,7 @@ void sghyper(
 			*median=(double)xhypergeometric(0.5,(int)a,(int)m,(int)N);
 			paramSet=true;
 		case IAi:
-			if (not paramSet) {
+			if (! paramSet) {
 				n=minm(m,a);
 				A=maxm(m,a);
 				B=N-A;
@@ -5276,7 +5276,7 @@ void sghyper(
 				paramSet=true;
 			}
 		case IAii:
- 			if (not paramSet) {
+ 			if (! paramSet) {
 				n=minm(m,a);
 				A=maxm(m,a);
 				B=N-A;
@@ -5284,7 +5284,7 @@ void sghyper(
 				paramSet=true;
 			}
 		case IIA:
- 			if (not paramSet) {
+ 			if (! paramSet) {
 				A=minm(m,a);
 				n=maxm(m,a);
 				B=N-A;
@@ -5292,7 +5292,7 @@ void sghyper(
 				paramSet=true;
 			}
 		case IIIA:
- 			if (not paramSet) {
+ 			if (! paramSet) {
 				A=minm(m,a);
 				n=maxm(m,a);
 				B=N-A;
@@ -5333,11 +5333,11 @@ void sghyper(
 			}
 			break;
 		case IB:
-			if (not paramSet) {
+			if (! paramSet) {
 				paramSet=true;
 			}
 		case IV:
-			if (not paramSet) {
+			if (! paramSet) {
 				paramSet=true;
 			}
 
@@ -5592,7 +5592,7 @@ int  xgenhypergeometric(
 	double m1=(n*a)/N;
 	double m2=(m1*(b*(a+b-n)))/(N*(N-1.0));
 
-	if (0>p or p>1)
+	if (0>p || p>1)
 		error("\nProbability must be in the 0 to 1 range");
 
 	int x=(int)(0.5+m1+sqrt(m2)*qnorm(p,0,1,true,false));
@@ -5605,11 +5605,11 @@ int  xgenhypergeometric(
       		return x;
 		}
       	larger=(p<=pgenhypergeometric(--x,a,m,N,variety));
-      	if (not larger) {
+      	if (! larger) {
       		return ++x;
 		}
    	}
-    while (not larger){
+    while (! larger){
       	larger=(p<=pgenhypergeometric(++x,a,m,N,variety));
       	if (larger) {
       		return x;
@@ -5746,7 +5746,7 @@ double NewtonRoot(
 			h=scale*0.5*fcn/(deriv+DBL_EPSILON*fabs(fcn));
 		}
 
-		if (not R_FINITE(h)) {
+		if (! R_FINITE(h)) {
 			error("\nInfinite value in NewtonRoot()");
 			return x;
 		}
@@ -5763,7 +5763,7 @@ double NewtonRoot(
 		ho=fabs(h);
 
 		x=(useLog)?exp(z):z;
-    until(m++>MAXITERN or not more);
+    until(m++>MAXITERN || ! more);
 
 	if (m>MAXITERN) {
 		error("\nIteration limit exceeded in NewtonRoot()");
@@ -5786,7 +5786,7 @@ double NewtonRoot(
 {
 	int const MAXITERATES=100;
 
-	if (c<0.0 and floor(c) equals c) 
+	if (c<0.0 && floor(c) equals c) 
 		return NA_REAL;
 
 	double sum=0.0;
@@ -5800,7 +5800,7 @@ double NewtonRoot(
 		sum+=term;
 		term*=((a+djm1)*(b+djm1))/(c+djm1)*(x/dj);
 		j++;
-	until(sum+term equals sum or j>MAXITERATES);
+	until(sum+term equals sum || j>MAXITERATES);
 
 	return sum;
 }
@@ -6309,3 +6309,4 @@ static double correc(int i, int n)
     i--;
     return((c1[i] + an * (c2[i] + an * c3[i])) * mic);
 } /* correc */
+
