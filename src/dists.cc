@@ -5838,7 +5838,7 @@ static bool ziggInitialized=false; // Makes sure zigg is initialized at least on
 static ULONG	jz,
 				jsr; // moved initialization
 #define SHR3 (jz=jsr, jsr^=(jsr<<13), jsr^=(jsr>>17), jsr^=(jsr<<5),jz+jsr)
-#define UNI (.5 + signed(SHR3) * .2328306e-9)
+#define UNI (.5 + (signed)(SHR3) * .2328306e-9)
 #define IUNI SHR3
 
 static long hz;
