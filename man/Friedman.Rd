@@ -72,7 +72,7 @@ Odeh, R.E. (1977). Extended tables of the distribution of Friedman's S-statistic
 }
 
 \author{
-	Bob Wheeler \email{bwheeler@echip.com}
+	Bob Wheeler \email{rwheeler@echip.com}
 }
 \examples{
 

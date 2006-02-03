@@ -1,8 +1,8 @@
 Package:SuppDists
-Version: 1.0-13
-Date: 2005/04/07
+Version: 1.0-14
+Date: 2006/02/03
 Title: Supplementary distributions
-Author: Bob Wheeler <bwheeler@echip.com>
+Author: Bob Wheeler <rwheeler@echip.com>
 Maintainer: Bob Wheeler <bwheeler@echip.com>
 Description: Ten distributions supplementing those built into R. Inverse Gauss, 
 	Kruskal-Wallis, Kendall's Tau, Friedman's chi squared, Spearman's rho, maximum F ratio, 
@@ -11,4 +11,4 @@ Description: Ten distributions supplementing those built into R. Inverse Gauss,
 	of George Marsaglia are included.
 License: GPL vesion 2 or newer
 URL: http://www.bobwheeler.com/stat 
-Packaged: Thu Apr  7 16:10:49 2005; Bob Wheeler
+Packaged: Fri Feb  3 12:57:17 2006; Bob Wheeler

@@ -26,7 +26,7 @@ rziggurat(n, normal=TRUE, new.start=FALSE, seed=556677)
 Marsaglia, George, and Tsang, Wai Wan. 2000. The Ziggurat method for generating random variables. \emph{Journal of Statistical software.} \bold{5-8.} \url{http://www.jstatsoft.org/v05/i08/}
 }
 \author{
-	Bob Wheeler \email{bwheeler@echip.com}
+	Bob Wheeler \email{rwheeler@echip.com}
 }
 \examples{
 

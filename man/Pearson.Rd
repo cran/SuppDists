@@ -34,7 +34,7 @@ sPearson(N, rho=0.0)
 
 
 \author{
-	Bob Wheeler \email{bwheeler@echip.com}
+	Bob Wheeler \email{rwheeler@echip.com}
 }
 \examples{
 

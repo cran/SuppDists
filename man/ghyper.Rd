@@ -126,7 +126,7 @@ Xekalaki, E. (1983). The univariate generalized Waring distribution in relation 
 }
 
 \author{
-	Bob Wheeler \email{bwheeler@echip.com}
+	Bob Wheeler \email{rwheeler@echip.com}
 }
 \examples{
 

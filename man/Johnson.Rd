@@ -48,8 +48,8 @@ and where \eqn{f( )} has four possible forms:
 
 \tabular{ll}{
 	SL:\tab \eqn{f(u)=u} the log normal \cr
-	SB:\tab \eqn{f(u)=u+\sqrt{1+u^2}}{f(u)=u+sqrt(1+u^2)} an unbounded distribution\cr
-	SU:\tab \eqn{f(u)=u/(1-u)} a bounded distribution\cr
+	SU:\tab \eqn{f(u)=u+\sqrt{1+u^2}}{f(u)=u+sqrt(1+u^2)} an unbounded distribution\cr
+	SB:\tab \eqn{f(u)=u/(1-u)} a bounded distribution\cr
 	SN:\tab \eqn{\exp(u)} the normal
 }
 
@@ -69,7 +69,7 @@ Wheeler, R.E. (1980). Quantile estimators of Johnson curve parameters. \emph{Bio
 }
 
 \author{
-	Bob Wheeler \email{bwheeler@echip.com}
+	Bob Wheeler \email{rwheeler@echip.com}
 }
 \examples{
 
