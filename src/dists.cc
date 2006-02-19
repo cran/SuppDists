@@ -1,7 +1,7 @@
 #include "wheeler.h"
 #include <math.h>
 #include <float.h>
-#include <new.h>
+#include <new.h>  // Can't use <new> because it doesn't contian set_new_handler()
 #include <R.h>
 #include <Rmath.h>
 
@@ -5806,8 +5806,18 @@ double NewtonRoot(
 	return sum;
 }
 
+// The following was moved to here so that ziggurat can use it
+// Marsaglia's multiply with cary
 
+static const double RANDCONST=2.32830643654e-10;
 
+ULONG zSeed=362436069, wSeed=521288629;
+#define zNew  ((zSeed=36969*(zSeed&65535)+(zSeed>>16))<<16)
+#define wNew  ((wSeed=18000*(wSeed&65535)+(wSeed>>16))&65535)
+#define IUNIFORM  (zNew+wNew)
+#define UNIFORM   ((zNew+wNew)*RANDCONST)
+#define setseed(A,B) zSeed=A;wSeed=B;
+#define getseed(A,B) A=zSeed;B=wSeed;
 
 /* The ziggurat method for RNOR and REXP
 
@@ -5832,15 +5842,22 @@ for generating random variables", Journ. Statistical Software.
 
 
 double nfix(void);
-double efix(void);\
+double efix(void);
 
 static bool ziggInitialized=false; // Makes sure zigg is initialized at least once
 
 static ULONG	jz,
 				jsr; // moved initialization
+static ULONG    jcong;
 #define SHR3 (jz=jsr, jsr^=(jsr<<13), jsr^=(jsr>>17), jsr^=(jsr<<5),jz+jsr)
-#define UNI (.5 + (signed)(SHR3) * .2328306e-9)
-#define IUNI SHR3
+#define CONG (jcong=69069*jcong+1234567)
+#define KISS ((IUNIFORM^CONG)+SHR3)
+/*Switched to KISS -- see Leong, et.al. (2005) A comment on the implementtion of the Ziggurat Method 
+   Journal of statistical software 12-7, 1-4*/
+/*#define UNI (.5 + (signed)(SHR3) * .2328306e-9) 
+  #define IUNI SHR3*/
+#define UNI (.5 + (signed)(KISS) * .2328306e-9)
+#define IUNI KISS
 
 static long hz;
 
@@ -5946,8 +5963,8 @@ void zigset(ULONG jsrseed) {
 		  
 	jsr=123456789; // moved to here to allow seed to control generation
 	jsr^=jsrseed;
-
-
+	setseed(jsrseed,jsrseed)  /* Added to support Leong et.al.*/
+    jcong=jsrseed;
 
 	  /* Set up tables for RNOR */	  
 	q=vn/exp(-.5*dn*dn);
@@ -5994,7 +6011,7 @@ void zigset(ULONG jsrseed) {
 
 
 
-
+/* The following was moved above ziggurat
 // Marsaglia's multiply with cary
 
 static const double RANDCONST=2.32830643654e-10;
@@ -6006,7 +6023,7 @@ ULONG zSeed=362436069, wSeed=521288629;
 #define UNIFORM   ((zNew+wNew)*RANDCONST)
 #define setseed(A,B) zSeed=A;wSeed=B;
 #define getseed(A,B) A=zSeed;B=wSeed;
-
+*/
 
 static int nSeed=1020;
 static ULONG Q[1020];   // using Q[endQ] to hold variable.
