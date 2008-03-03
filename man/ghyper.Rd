@@ -37,7 +37,7 @@ tghyper(a, k, N) ## scalar arguments only
 	\item{lower.tail}{logical vector; if TRUE (default), probabilities are \eqn{P[X <= x]}, otherwise, \eqn{P[X > x]}}
 }
 \value{
-  The output values conform to the output from other such functions in R. \code{dghyper()} gives the density, \code{pghyper()} the distribution function and \code{qghyper()} its inverse. \code{rghyper()} generates random numbers. \code{sghyper()} produces a list containing parameters corresponding to the arguments -- mean, median, mode, variance, sd, third cental moment, fourth central moment, Pearson's skewness, skewness, and kurtosis.
+  The output values conform to the output from other such functions in R. \code{dghyper()} gives the density, \code{pghyper()} the distribution function and \code{qghyper()} its inverse. \code{rghyper()} generates random numbers. \code{sghyper()} produces a list containing parameters corresponding to the arguments -- mean, median, mode, variance, sd, third central moment, fourth central moment, Pearson's skewness, skewness, and kurtosis.
 \cr
 	The function \code{tghyper()} returns the hypergeometric type and the range of values for x.	
 }

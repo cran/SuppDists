@@ -1,6 +1,6 @@
 Package:SuppDists
-Version: 1.1-0
-Date: 2006/02/19
+Version: 1.1-1
+Date: 2008/03/03
 Title: Supplementary distributions
 Author: Bob Wheeler <rwheeler@echip.com>
 Maintainer: Bob Wheeler <bwheeler@echip.com>
@@ -11,4 +11,4 @@ Description: Ten distributions supplementing those built into R. Inverse Gauss,
 	of George Marsaglia are included.
 License: GPL vesion 2 or newer
 URL: http://www.bobwheeler.com/stat 
-Packaged: Sun Feb 19 11:32:27 2006; Bob Wheeler
+Packaged: Mon Mar  3 16:49:09 2008; Bob Wheeler

@@ -1,7 +1,7 @@
 #include "wheeler.h"
 #include <math.h>
 #include <float.h>
-#include <new.h>  // Can't use <new> because it doesn't contian set_new_handler()
+#include <new>  // Can't use <new> because it doesn't contian set_new_handler()
 #include <R.h>
 #include <Rmath.h>
 
@@ -2278,7 +2278,7 @@ FriedmanStrc* FriedmanExact(
 	int n
 )
 {
-	set_new_handler(freeStoreException);
+    std::set_new_handler(freeStoreException);
 
 		// if a static array exists, copies it into a FriedmanStrc and returns
 	FriedmanStrc* aStrc;

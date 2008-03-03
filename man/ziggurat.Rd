@@ -14,7 +14,7 @@ rziggurat(n, normal=TRUE, new.start=FALSE, seed=556677)
 	\item{seed}{scalar 32 bit starting integer}
 }
 \value{
-  Generates a vector of pseudo random numbers in the range 0 to 1. 
+  Generates a vector of real pseudo random numbers. 
 }
 
 \note{
