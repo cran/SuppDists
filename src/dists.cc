@@ -1,7 +1,9 @@
 #include "wheeler.h"
 #include <math.h>
 #include <float.h>
-#include <new>  // Can't use <new> because it doesn't contian set_new_handler()
+//Hornik replaced <new.h> with <new> and then inserted 
+// std::set_new_handler(freeStoreException); on line 2283 (March 2008)
+#include <new>  
 #include <R.h>
 #include <Rmath.h>
 
@@ -4733,7 +4735,7 @@ hyperType typeHyper(
 		variety=IB;		// Specified 1.0<N to avoid problems with small parameters
 	}
 	else
-	if (a<0.0 && N<a-1.0 && 0.0<m && isint(m))	{ //Kemp&Kemp use b<0 && b!=-1
+	if (a<0.0 && N<m+a-1.0 && 0.0<m && isint(m))	{ //Kemp&Kemp use b<0 && b!=-1, Ben Bolker mod
 		variety=IIA;
 	}
 	else
