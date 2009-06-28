@@ -83,7 +83,7 @@ Example: Suppose Toronto has won 3 games and Atlanta 1 in the World Series. What
 
 Example: Suppose that only once in the last century has the high-water mark at the St. Joe bridge exceeded 12 feet, what is the probability that it will not do so in the next ten years?
 
-\item Waiting time: Consider an urn with T balls, m of which are white, and that drawing with replacement is continued until w white balls are obtained, then the distribution function of x, the number of balls in excess of w that must be drawn is desired.  Here a = -w , N = -m-1, and k = T - m. 
+\item Waiting time: Consider an urn with T balls, m of which are white, and that drawing without replacement is continued until w white balls are obtained, then the distribution function of x, the number of balls in excess of w that must be drawn is desired.  Here a = -w , N = -m-1, and k = T - m. 
 
 Example: Suppose a lot of 100 contains 5 defectives. What is the mean number of items that must be inspected before a defective item is found?
 
@@ -126,7 +126,7 @@ Xekalaki, E. (1983). The univariate generalized Waring distribution in relation 
 }
 
 \author{
-	Bob Wheeler \email{rwheeler@echip.com}
+	Bob Wheeler \email{bwheelerg@gmail.com}
 }
 \examples{
 

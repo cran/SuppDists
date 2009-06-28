@@ -54,7 +54,7 @@ Kendall, M. and Smith, B.B. (1939). The problem of m rankings. \emph{Ann. Math. 
 }
 
 \author{
-	Bob Wheeler \email{rwheeler@echip.com}
+	Bob Wheeler \email{bwheelerg@gmail.com}
 }
 \examples{
 

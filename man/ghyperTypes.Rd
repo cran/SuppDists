@@ -103,6 +103,6 @@ Kemp, C.D., and Kemp, A.W. (1956). Generalized hypergeometric distributions. \em
 }
 
 \author{
-	Bob Wheeler \email{rwheeler@echip.com}
+	Bob Wheeler \email{bwheelerg@gmail.com}
 }
 \keyword{distribution}

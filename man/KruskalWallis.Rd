@@ -60,7 +60,7 @@ Wallace, D.L. (1959). Simplified beta-approximations to the Kruskal-Wallis H tes
 }
 
 \author{
-	Bob Wheeler \email{rwheeler@echip.com}
+	Bob Wheeler \email{bwheelerg@gmail.com}
 }
 \examples{
 
