@@ -18,8 +18,9 @@ rziggurat(n, normal=TRUE, new.start=FALSE, seed=556677)
 }
 
 \note{
-        Because of word length differences, this function does not work
-	properly on 64 bit machines.
+  This function does not work properly on LP64 machines which use 64 bit
+  longs.
+  
 	This implementation running in \R is approximately three times as fast as rnorm().
 }
 

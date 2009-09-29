@@ -30,8 +30,7 @@ As for randomness, it passes all tests in The Diehard Battery of Tests of Random
 MWC1019 has the property that every possible sequence of 1018 successive 32-bit integers will appear somewhere in the full period,  for those concerned with the ``equi-distribution'' in dimensions 2,3,...1016,1017,1018.''
 
 NOTE:
-   Because of word length differences, this function does not work
-   corrctly on 64 bit machines.
+   This function does not work correctly on LP64 bit machines which use 64 bit longs.
    
 	The generator requires 1019 initial 32 bit random values to start. These are provided by using Marsaglia's MWC generator. By setting new.start=FALSE, the sequence may be sampled in blocks. \R specifies an internal array dimension of 625 for seed length, and thus at the present time, it is not possible to implement this generator using the .Random.seed mechanism. In this implementation, rMWC1019() seems to be about twice as fast as the Mersenne-Twister implemented in \R.
 

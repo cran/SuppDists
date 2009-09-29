@@ -1,6 +1,6 @@
 Package: SuppDists
-Version: 1.1-4
-Date: 2009/06/28
+Version: 1.1-6
+Date: 2009/09/29
 Title: Supplementary distributions
 Author: Bob Wheeler <bwheelerg@gmail.com>
 Maintainer: Bob Wheeler <bwheelerg@gmail.com>
@@ -11,8 +11,8 @@ Description: Ten distributions supplementing those built into R.
         scores and generalized hypergeometric distributions. In
         addition two random number generators of George Marsaglia are
         included.
-License: GPL-2
+License: GPL (>= 2)
 URL: http://www.bobwheeler.com/stat
-Packaged: 2009-06-18 14:19:08 UTC; Bob Wheeler
+Packaged: 2009-09-29 21:01:23 UTC; Bob Wheeler
 Repository: CRAN
-Date/Publication: 2009-06-18 16:37:20
+Date/Publication: 2009-09-30 18:56:07
