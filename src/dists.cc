@@ -6078,10 +6078,10 @@ void QInit(
 
 
 ULONG MWC1019(void){
-	ULONG long t;
+	ULONG t;
 	int	i = endQ-1; 
 
-	t = 147669672LL*Q[i] + Q[endQ]; 
+	t = 147669672L*Q[i] + Q[endQ]; 
 	Q[endQ] = (t>>32);
 	if(i>0) 
 		return(Q[i--] = t);
