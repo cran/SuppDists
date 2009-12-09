@@ -1,5 +1,5 @@
 Package: SuppDists
-Version: 1.1-9
+Version: 1.1-9.1
 Date: 2009/12/09
 Title: Supplementary distributions
 Author: Bob Wheeler <bwheelerg@gmail.com>
@@ -12,10 +12,11 @@ Description: Ten distributions supplementing those built into R.
         addition two random number generators of George Marsaglia are
         included.
 License: GPL (>= 2)
-URL: http://www.bobwheeler.com/stat
-Packaged: 2013-03-22 07:31:25 UTC; ripley
+URL: no longer valid
+Packaged: 2013-10-30 15:11:04 UTC; ripley
 Repository: CRAN
-Date/Publication: 2013-03-22 08:37:25
+Date/Publication: 2013-10-30 16:14:22
 NeedsCompilation: yes
 X-CRAN-Comment: Orphaned on 2013-03-22: the maintainer is unresponsive.
 X-CRAN-Original-Maintainer: Bob Wheeler <bwheelerg@gmail.com>
+X-CRAN-Original-URL: http://www.bobwheeler.com/stat

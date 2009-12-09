@@ -1,9 +1,12 @@
+// needs to come first, BDR 2013-10-30
+#include <new>
+
 #include "wheeler.h"
 #include <math.h>
 #include <float.h>
 //Hornik replaced <new.h> with <new> and then inserted 
 // std::set_new_handler(freeStoreException); on line 2283 (March 2008)
-#include <new>  
+//#include <new>  
 #include <R.h>
 #include <Rmath.h>
 
