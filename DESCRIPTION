@@ -1,6 +1,6 @@
 Package: SuppDists
-Version: 1.1-6
-Date: 2009/09/29
+Version: 1.1-8
+Date: 2009/12/09
 Title: Supplementary distributions
 Author: Bob Wheeler <bwheelerg@gmail.com>
 Maintainer: Bob Wheeler <bwheelerg@gmail.com>
@@ -13,6 +13,6 @@ Description: Ten distributions supplementing those built into R.
         included.
 License: GPL (>= 2)
 URL: http://www.bobwheeler.com/stat
-Packaged: 2009-09-29 21:01:23 UTC; Bob Wheeler
+Packaged: 2009-12-10 15:17:00 UTC; Bob Wheeler
 Repository: CRAN
-Date/Publication: 2009-09-30 18:56:07
+Date/Publication: 2009-12-11 18:07:33

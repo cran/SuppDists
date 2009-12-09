@@ -1274,7 +1274,7 @@ DISTS_API void pmaxFratioR(
 		return NA_REAL;
 
 	if (N equals 2) {
-		return 1.0-0.5*(1.0-pf(F,(double)df,(double)df,true,false));
+		return 1-2*(1.0-pf(F,(double)df,(double)df,true,false));
 	}
 
 		// Calculate a root of the constant to scale x in pmaxFRatioIntegrand()
