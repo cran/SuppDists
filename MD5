@@ -1,6 +1,6 @@
-8252bcca8506b41c885c7a01cf9acfcf *DESCRIPTION
+0a2804d4e914071f4e4a6ba5884945cc *DESCRIPTION
 6255dd5fa898729d60829fb0e994f4c2 *INDEX
-f8be206e8b425a3c6fd3cb2378deacac *NAMESPACE
+b8ada4d098044796a674f2183b58a62d *NAMESPACE
 844eff3abfae09a73eeca3fe19acfbdc *R/Dists.R
 08493a0d13865ff9dd04a4a9975c27e4 *man/Friedman.Rd
 ed3163d8443f1be0ca07316c395fba5e *man/Johnson.Rd
@@ -17,6 +17,6 @@ a57afd49263a93c19a5ea5b0d74b0d1e *man/MWC1019.Rd
 80f7579e859e847004a930dc40c550ad *man/maxFratio.Rd
 4fb683e47f2930caffab81a9891feed6 *man/ziggurat.Rd
 dca3fd92c6c1406c960b845d2d9aef03 *src/datatabs.h
-3ab2741de249ace38d8459af99bf3356 *src/dists.cc
+82852473c254001a85e50731979d820f *src/dists.cc
 0ea308d582e6f945b8e261f4bbe14476 *src/dists.h
 57aa3635056fbf85a6b5d32e65fae157 *src/wheeler.h

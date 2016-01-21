@@ -1,14 +1,21 @@
-// needs to come first, BDR 2013-10-30
+// needs to come first, BDR 2013-10-30, and for gcc 6 we need NO_C_HEADERS
 #include <new>
+#include <cmath>
+#include <cstdlib>
+
+// for Solaris
+using namespace std;
 
 #include "wheeler.h"
-#include <math.h>
-#include <float.h>
-//Hornik replaced <new.h> with <new> and then inserted 
-// std::set_new_handler(freeStoreException); on line 2283 (March 2008)
-//#include <new>  
+//#include <float.h>
+//
+#define NO_C_HEADERS
 #include <R.h>
 #include <Rmath.h>
+
+// snprintf is in fact not C++, but R.h used to include this
+#include <stdio.h> // for snprintf
+#include <cstring> // for memset
 
 #include "dists.h"
 #include "datatabs.h"
