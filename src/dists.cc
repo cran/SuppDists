@@ -1,4 +1,3 @@
-// needs to come first, BDR 2013-10-30, and for gcc 6 we need NO_C_HEADERS
 #include <new>
 #include <cmath>
 #include <cstdlib>
@@ -7,14 +6,9 @@
 using namespace std;
 
 #include "wheeler.h"
-//#include <float.h>
-//
-#define NO_C_HEADERS
 #include <R.h>
 #include <Rmath.h>
 
-// snprintf is in fact not C++, but R.h used to include this
-#include <stdio.h> // for snprintf
 #include <cstring> // for memset
 
 #include "dists.h"
