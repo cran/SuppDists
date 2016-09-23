@@ -4,6 +4,10 @@
 
 // for Solaris
 using namespace std;
+#if defined(__SUNPRO_CC) && (__cplusplus < 201103L)
+// This is not C++98 and Solaris CC's headers do not include it
+extern "C" int snprintf(char *str, size_t size, const char *format, ...);
+#endif
 
 #include "wheeler.h"
 #include <R.h>
@@ -6086,6 +6090,7 @@ ULONG MWC1019(void){
 	int	i = endQ-1; 
 
 	t = 147669672L*Q[i] + Q[endQ]; 
+// ULONG is unsigned long: this only makes sense for a 64-bit type
 	Q[endQ] = (t>>32);
 	if(i>0) 
 		return(Q[i--] = t);
