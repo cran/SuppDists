@@ -6,7 +6,7 @@ function (x, r, N, log = FALSE)
     r <- rep(r, length.out = M)
     N <- rep(N, length.out = M)
     rho <- rep(FALSE, length.out = M)
-    value <- .C("dFriedmanR", as.double(x), as.integer(r), as.integer(N), 
+    value <- .C(`dFriedmanR`, as.double(x), as.integer(r), as.integer(N), 
         as.integer(M), as.integer(rho), val = double(M),PACKAGE="SuppDists")$val
     if (log == TRUE) 
         value <- log(value)
@@ -20,7 +20,7 @@ function (x, a, k, N, log = FALSE)
     a <- rep(a, length.out = M)
     k <- rep(k, length.out = M)
     N <- rep(N, length.out = M)
-    value <- .C("dghyperR", as.integer(x), as.double(a), as.double(k), 
+    value <- .C(`dghyperR`, as.integer(x), as.double(a), as.double(k), 
         as.double(N), as.integer(M), val = double(M),PACKAGE="SuppDists")$val
     if (log == TRUE) 
         value <- log(value)
@@ -33,7 +33,7 @@ function (x, nu, lambda, log = FALSE)
     x <- rep(x, length.out = N)
     nu <- rep(nu, length.out = N)
     lambda <- rep(lambda, length.out = N)
-    value <- .C("dinvGaussR", as.double(x), as.double(nu), as.double(lambda), 
+    value <- .C(`dinvGaussR`, as.double(x), as.double(nu), as.double(lambda), 
         as.integer(N), lambda = double(N),PACKAGE="SuppDists")$lambda
     if (log == TRUE) 
         value <- log(value)
@@ -73,7 +73,7 @@ function (x, parms, log = FALSE)
     xi <- rep(xi, length.out = N)
     lambda <- rep(lambda, length.out = N)
     type <- rep(type, length.out = N)
-    value <- .C("dJohnsonR", as.double(x), as.double(gamma), 
+    value <- .C(`dJohnsonR`, as.double(x), as.double(gamma), 
         as.double(delta), as.double(xi), as.double(lambda), as.integer(type), 
         as.integer(N), val = double(N),PACKAGE="SuppDists")$val
     if (log == TRUE) 
@@ -86,7 +86,7 @@ function (x, N, log = FALSE)
     M <- max(length(x), length(N))
     x <- rep(x, length.out = M)
     N <- rep(N, length.out = M)
-    value <- .C("dKendallR", as.integer(N), as.double(x), as.integer(M), 
+    value <- .C(`dKendallR`, as.integer(N), as.double(x), as.integer(M), 
         val = double(M),PACKAGE="SuppDists")$val
     if (log == TRUE) 
         value <- log(value)
@@ -101,7 +101,7 @@ function (x, c, N, U, log = FALSE)
     n <- rep(N, length.out = M)
     U <- rep(U, length.out = M)
     Ns <- rep(FALSE, length.out = M)
-    value <- .C("dKruskalWallisR", as.double(x), as.integer(c), 
+    value <- .C(`dKruskalWallisR`, as.double(x), as.integer(c), 
         as.integer(n), as.double(U), as.integer(Ns), as.integer(M), 
         val = double(M),PACKAGE="SuppDists")$val
     if (log == TRUE) 
@@ -117,7 +117,7 @@ function (x, df, k, log = FALSE)
     x <- rep(x, length.out = N)
     df <- rep(df, length.out = N)
     k <- rep(k, length.out = N)
-    .C("dmaxFratioR", as.double(x), as.integer(df), as.integer(k), 
+    .C(`dmaxFratioR`, as.double(x), as.integer(df), as.integer(k), 
         as.integer(N), val = double(N),PACKAGE="SuppDists")$val
 }
 dNormScore <-
@@ -129,7 +129,7 @@ function (x, c, N, U, log = FALSE)
     n <- rep(N, length.out = M)
     U <- rep(U, length.out = M)
     Ns <- rep(TRUE, length.out = M)
-    value <- .C("dKruskalWallisR", as.double(x), as.integer(c), 
+    value <- .C(`dKruskalWallisR`, as.double(x), as.integer(c), 
         as.integer(n), as.double(U), as.integer(Ns), as.integer(M), 
         val = double(M),PACKAGE="SuppDists")$val
     if (log == TRUE) 
@@ -143,7 +143,7 @@ function (x, N, rho = 0, log = FALSE)
     x <- rep(x, length.out = M)
     rho <- rep(rho, length.out = M)
     N <- rep(N, length.out = M)
-    value <- .C("dcorrR", as.double(x), as.double(rho), as.integer(N), 
+    value <- .C(`dcorrR`, as.double(x), as.double(rho), as.integer(N), 
         as.integer(M), val = double(M),PACKAGE="SuppDists")$val
     if (log == TRUE) 
         value <- log(value)
@@ -157,7 +157,7 @@ function (x, r, log = FALSE)
     r <- rep(r, length.out = M)
     N <- rep(2, length.out = M)
     rho <- rep(TRUE, length.out = M)
-    value <- .C("dFriedmanR", as.double(x), as.integer(r), as.integer(N), 
+    value <- .C(`dFriedmanR`, as.double(x), as.integer(r), as.integer(N), 
         as.integer(M), as.integer(rho), val = double(M),PACKAGE="SuppDists")$val
     if (log == TRUE) 
         value <- log(value)
@@ -173,7 +173,7 @@ function (t, moment = "quant")
         sigma <- mom[[2]]
         skew <- mom[[3]]
         kurt <- mom[[4]]
-        value <- .C("JohnsonMomentFitR", as.double(mu), as.double(sigma), 
+        value <- .C(`JohnsonMomentFitR`, as.double(mu), as.double(sigma), 
             as.double(skew), as.double(kurt), gamma = double(1), 
             delta = double(1), xi = double(1), lambda = double(1), 
             type = integer(1),PACKAGE="SuppDists")
@@ -183,7 +183,7 @@ function (t, moment = "quant")
       sigma<-sqrt(t[2])
       skew<-t[3]/sigma^3
       kurt<-(t[4]/t[2]^2)-3
-      value <- .C("JohnsonMomentFitR", as.double(mu), as.double(sigma), 
+      value <- .C(`JohnsonMomentFitR`, as.double(mu), as.double(sigma), 
           as.double(skew), as.double(kurt), gamma = double(1), 
           delta = double(1), xi = double(1), lambda = double(1), 
           type = integer(1),PACKAGE="SuppDists")
@@ -196,7 +196,7 @@ function (t, moment = "quant")
         x50 <- input[[3]]
         x79.4 <- input[[4]]
         x95 <- input[[5]]
-        value <- .C("JohnsonFitR", as.double(x95), as.double(x79.4), 
+        value <- .C(`JohnsonFitR`, as.double(x95), as.double(x79.4), 
             as.double(x50), as.double(x20.6), as.double(x5), 
             gamma = double(1), delta = double(1), xi = double(1), 
             lambda = double(1), type = integer(1),PACKAGE="SuppDists")
@@ -250,7 +250,7 @@ function (N)
         length(N)
     else N
     M <- N%/%2
-    value <- .C("normOrdR", val = double(M), as.integer(N), as.integer(M),PACKAGE="SuppDists")$val
+    value <- .C(`normOrdR`, val = double(M), as.integer(N), as.integer(M),PACKAGE="SuppDists")$val
     if (0 == N%%2) 
         c(-value, rev(value))
     else c(-value, 0, rev(value))
@@ -264,11 +264,11 @@ function (q, r, N, lower.tail = TRUE, log.p = FALSE)
     N <- rep(N, length.out = M)
     rho <- rep(FALSE, length.out = M)
     if (lower.tail == TRUE) {
-        value <- .C("pFriedmanR", as.double(q), as.integer(r), 
+        value <- .C(`pFriedmanR`, as.double(q), as.integer(r), 
             as.integer(N), as.integer(M), as.integer(rho), val = double(M),PACKAGE="SuppDists")$val
     }
     else {
-        value <- .C("uFriedmanR", as.double(q), as.integer(r), 
+        value <- .C(`uFriedmanR`, as.double(q), as.integer(r), 
             as.integer(N), as.integer(M), as.integer(rho), val = double(M),PACKAGE="SuppDists")$val
     }
     if (log.p == TRUE) 
@@ -284,11 +284,11 @@ function (q, a, k, N, lower.tail = TRUE, log.p = FALSE)
     k <- rep(k, length.out = M)
     N <- rep(N, length.out = M)
     if (lower.tail == TRUE) {
-        value <- .C("pghyperR", as.integer(q), as.double(a), 
+        value <- .C(`pghyperR`, as.integer(q), as.double(a), 
             as.double(k), as.double(N), as.integer(M), val = double(M),PACKAGE="SuppDists")$val
     }
     else {
-        value <- .C("ughyperR", as.integer(q), as.double(a), 
+        value <- .C(`ughyperR`, as.integer(q), as.double(a), 
             as.double(k), as.double(N), as.integer(M), val = double(M),PACKAGE="SuppDists")$val
     }
     if (log.p == TRUE) 
@@ -303,11 +303,11 @@ function (q, nu, lambda, lower.tail = TRUE, log.p = FALSE)
     nu <- rep(nu, length.out = N)
     lambda <- rep(lambda, length.out = N)
     if (lower.tail == TRUE) {
-        value <- .C("pinvGaussR", as.double(q), as.double(nu), 
+        value <- .C(`pinvGaussR`, as.double(q), as.double(nu), 
             as.double(lambda), as.integer(N), val = double(N),PACKAGE="SuppDists")$val
     }
     else {
-        value <- .C("uinvGaussR", as.double(q), as.double(nu), 
+        value <- .C(`uinvGaussR`, as.double(q), as.double(nu), 
             as.double(lambda), as.integer(N), val = double(N),PACKAGE="SuppDists")$val
     }
     if (log.p == TRUE) 
@@ -349,12 +349,12 @@ function (q, parms, lower.tail = TRUE, log.p = FALSE)
     lambda <- rep(lambda, length.out = N)
     type <- rep(type, length.out = N)
     if (lower.tail == TRUE) {
-        value <- .C("pJohnsonR", as.double(q), as.double(gamma), 
+        value <- .C(`pJohnsonR`, as.double(q), as.double(gamma), 
             as.double(delta), as.double(xi), as.double(lambda), 
             as.integer(type), as.integer(N), val = double(N),PACKAGE="SuppDists")$val
     }
     else {
-        value <- .C("uJohnsonR", as.double(q), as.double(gamma), 
+        value <- .C(`uJohnsonR`, as.double(q), as.double(gamma), 
             as.double(delta), as.double(xi), as.double(lambda), 
             as.integer(type), as.integer(N), val = double(N),PACKAGE="SuppDists")$val
     }
@@ -369,11 +369,11 @@ function (q, N, lower.tail = TRUE, log.p = FALSE)
     q <- rep(q, length.out = M)
     N <- rep(N, length.out = M)
     if (lower.tail == TRUE) {
-        value <- .C("pKendallR", as.integer(N), as.double(q), 
+        value <- .C(`pKendallR`, as.integer(N), as.double(q), 
             as.integer(M), val = double(M),PACKAGE="SuppDists")$val
     }
     else {
-        value <- .C("uKendallR", as.integer(N), as.double(q), 
+        value <- .C(`uKendallR`, as.integer(N), as.double(q), 
             as.integer(M), val = double(M),PACKAGE="SuppDists")$val
     }
     if (log.p == TRUE) 
@@ -390,12 +390,12 @@ function (q, c, N, U, lower.tail = TRUE, log.p = FALSE)
     U <- rep(U, length.out = M)
     Ns <- rep(FALSE, length.out = M)
     if (lower.tail == TRUE) {
-        value <- .C("pKruskalWallisR", as.double(q), as.integer(c), 
+        value <- .C(`pKruskalWallisR`, as.double(q), as.integer(c), 
             as.integer(n), as.double(U), as.integer(Ns), as.integer(M), 
             val = double(M),PACKAGE="SuppDists")$val
     }
     else {
-        value <- .C("uKruskalWallisR", as.double(q), as.integer(c), 
+        value <- .C(`uKruskalWallisR`, as.double(q), as.integer(c), 
             as.integer(n), as.double(U), as.integer(Ns), as.integer(M), 
             val = double(M),PACKAGE="SuppDists")$val
     }
@@ -411,11 +411,11 @@ function (q, df, k, lower.tail = TRUE, log.p = FALSE)
     df <- rep(df, length.out = N)
     k <- rep(k, length.out = N)
     if (lower.tail == TRUE) {
-        value <- .C("pmaxFratioR", as.double(q), as.integer(df), 
+        value <- .C(`pmaxFratioR`, as.double(q), as.integer(df), 
             as.integer(k), as.integer(N), val = double(N),PACKAGE="SuppDists")$val
     }
     else {
-        value <- .C("umaxFratioR", as.double(q), as.integer(df), 
+        value <- .C(`umaxFratioR`, as.double(q), as.integer(df), 
             as.integer(k), as.integer(N), val = double(N),PACKAGE="SuppDists")$val
     }
     if (log.p == TRUE) 
@@ -432,12 +432,12 @@ function (q, c, N, U, lower.tail = TRUE, log.p = FALSE)
     U <- rep(U, length.out = M)
     Ns <- rep(TRUE, length.out = M)
     if (lower.tail == TRUE) {
-        value <- .C("pKruskalWallisR", as.double(q), as.integer(c), 
+        value <- .C(`pKruskalWallisR`, as.double(q), as.integer(c), 
             as.integer(n), as.double(U), as.integer(Ns), as.integer(M), 
             val = double(M),PACKAGE="SuppDists")$val
     }
     else {
-        value <- .C("uKruskalWallisR", as.double(q), as.integer(c), 
+        value <- .C(`uKruskalWallisR`, as.double(q), as.integer(c), 
             as.integer(n), as.double(U), as.integer(Ns), as.integer(M), 
             val = double(M),PACKAGE="SuppDists")$val
     }
@@ -453,11 +453,11 @@ function (q, N, rho = 0, lower.tail = TRUE, log.p = FALSE)
     rho <- rep(rho, length.out = M)
     N <- rep(N, length.out = M)
     if (lower.tail == TRUE) {
-        value <- .C("pcorrR", as.double(q), as.double(rho), as.integer(N), 
+        value <- .C(`pcorrR`, as.double(q), as.double(rho), as.integer(N), 
             as.integer(M), val = double(M),PACKAGE="SuppDists")$val
     }
     else {
-        value <- .C("ucorrR", as.double(q), as.double(rho), as.integer(N), 
+        value <- .C(`ucorrR`, as.double(q), as.double(rho), as.integer(N), 
             as.integer(M), val = double(M),PACKAGE="SuppDists")$val
     }
     if (log.p == TRUE) 
@@ -473,11 +473,11 @@ function (q, r, lower.tail = TRUE, log.p = FALSE)
     N <- rep(2, length.out = M)
     rho <- rep(TRUE, length.out = M)
     if (lower.tail == TRUE) {
-        value <- .C("pFriedmanR", as.double(q), as.integer(r), 
+        value <- .C(`pFriedmanR`, as.double(q), as.integer(r), 
             as.integer(N), as.integer(M), as.integer(rho), val = double(M),PACKAGE="SuppDists")$val
     }
     else {
-        value <- .C("uFriedmanR", as.double(q), as.integer(r), 
+        value <- .C(`uFriedmanR`, as.double(q), as.integer(r), 
             as.integer(N), as.integer(M), as.integer(rho), val = double(M),PACKAGE="SuppDists")$val
     }
     if (log.p == TRUE) 
@@ -496,7 +496,7 @@ function (p, r, N, lower.tail = TRUE, log.p = FALSE)
     r <- rep(r, length.out = M)
     N <- rep(N, length.out = M)
     rho <- rep(FALSE, length.out = M)
-    .C("qFriedmanR", as.double(p), as.integer(r), as.integer(N), 
+    .C(`qFriedmanR`, as.double(p), as.integer(r), as.integer(N), 
         as.integer(M), as.integer(rho), val = double(M),PACKAGE="SuppDists")$val
 }
 qghyper <-
@@ -511,7 +511,7 @@ function (p, a, k, N, lower.tail = TRUE, log.p = FALSE)
     a <- rep(a, length.out = M)
     k <- rep(k, length.out = M)
     N <- rep(N, length.out = M)
-    value <- .C("qghyperR", as.double(p), as.double(a), as.double(k), 
+    value <- .C(`qghyperR`, as.double(p), as.double(a), as.double(k), 
         as.double(N), as.integer(M), val = double(M),PACKAGE="SuppDists")$val
     value
 }
@@ -526,7 +526,7 @@ function (p, nu, lambda, lower.tail = TRUE, log.p = FALSE)
     p <- rep(p, length.out = N)
     nu <- rep(nu, length.out = N)
     lambda <- rep(lambda, length.out = N)
-    .C("qinvGaussR", as.double(p), as.double(nu), as.double(lambda), 
+    .C(`qinvGaussR`, as.double(p), as.double(nu), as.double(lambda), 
         as.integer(N), value = double(N),PACKAGE="SuppDists")$value
 }
 qJohnson <-
@@ -567,7 +567,7 @@ function (p, parms, lower.tail = TRUE, log.p = FALSE)
     xi <- rep(xi, length.out = N)
     lambda <- rep(lambda, length.out = N)
     type <- rep(type, length.out = N)
-    .C("qJohnsonR", as.double(p), as.double(gamma), as.double(delta), 
+    .C(`qJohnsonR`, as.double(p), as.double(gamma), as.double(delta), 
         as.double(xi), as.double(lambda), as.integer(type), as.integer(N), 
         val = double(N),PACKAGE="SuppDists")$val
 }
@@ -581,7 +581,7 @@ function (p, N, lower.tail = TRUE, log.p = FALSE)
     M <- max(length(p), length(N))
     p <- rep(p, length.out = M)
     N <- rep(N, length.out = M)
-    .C("qKendallR", as.integer(N), as.double(p), as.integer(M), 
+    .C(`qKendallR`, as.integer(N), as.double(p), as.integer(M), 
         val = double(M),PACKAGE="SuppDists")$val
 }
 qKruskalWallis <-
@@ -597,7 +597,7 @@ function (p, c, N, U, lower.tail = TRUE, log.p = FALSE)
     N <- rep(N, length.out = M)
     U <- rep(U, length.out = M)
     Ns <- rep(FALSE, length.out = M)
-    .C("qKruskalWallisR", as.double(p), as.integer(c), as.integer(N), 
+    .C(`qKruskalWallisR`, as.double(p), as.integer(c), as.integer(N), 
         as.double(U), as.integer(Ns), as.integer(M), val = double(M),PACKAGE="SuppDists")$val
 }
 qmaxFratio <-
@@ -611,7 +611,7 @@ function (p, df, k, lower.tail = TRUE, log.p = FALSE)
     p <- rep(p, length.out = N)
     df <- rep(df, length.out = N)
     k <- rep(k, length.out = N)
-    .C("qmaxFratioR", as.double(p), as.integer(df), as.integer(k), 
+    .C(`qmaxFratioR`, as.double(p), as.integer(df), as.integer(k), 
         as.integer(N), val = double(N),PACKAGE="SuppDists")$val
 }
 qNormScore <-
@@ -627,7 +627,7 @@ function (p, c, N, U, lower.tail = TRUE, log.p = FALSE)
     N <- rep(N, length.out = M)
     U <- rep(U, length.out = M)
     Ns <- rep(TRUE, length.out = M)
-    .C("qKruskalWallisR", as.double(p), as.integer(c), as.integer(N), 
+    .C(`qKruskalWallisR`, as.double(p), as.integer(c), as.integer(N), 
         as.double(U), as.integer(Ns), as.integer(M), val = double(M),PACKAGE="SuppDists")$val
 }
 qPearson <-
@@ -641,7 +641,7 @@ function (p, N, rho = 0, lower.tail = TRUE, log.p = FALSE)
     p <- rep(p, length.out = M)
     rho <- rep(rho, length.out = M)
     N <- rep(N, length.out = M)
-    .C("qcorrR", as.double(p), as.double(rho), as.integer(N), 
+    .C(`qcorrR`, as.double(p), as.double(rho), as.integer(N), 
         as.integer(M), val = double(M),PACKAGE="SuppDists")$val
 }
 qSpearman <-
@@ -656,7 +656,7 @@ function (p, r, lower.tail = TRUE, log.p = FALSE)
     r <- rep(r, length.out = M)
     N <- rep(2, length.out = M)
     rho <- rep(TRUE, length.out = M)
-    .C("qFriedmanR", as.double(p), as.integer(r), as.integer(N), 
+    .C(`qFriedmanR`, as.double(p), as.integer(r), as.integer(N), 
         as.integer(M), as.integer(rho), val = double(M),PACKAGE="SuppDists")$val
 }
 rFriedman <-
@@ -669,7 +669,7 @@ function (n, r, N)
     r <- rep(r, length.out = M)
     N <- rep(N, length.out = M)
     rho <- rep(FALSE, length.out = M)
-    .C("rFriedmanR", as.integer(r), as.integer(N), as.integer(rho), 
+    .C(`rFriedmanR`, as.integer(r), as.integer(N), as.integer(rho), 
         as.integer(n), as.integer(M), value = double(n),PACKAGE="SuppDists")$value
 }
 rghyper <-
@@ -682,7 +682,7 @@ function (n, a, k, N)
     a <- rep(a, length.out = K)
     k <- rep(k, length.out = K)
     N <- rep(N, length.out = K)
-    .C("rghyperR", as.double(a), as.double(k), as.double(N), 
+    .C(`rghyperR`, as.double(a), as.double(k), as.double(N), 
         as.integer(n), as.integer(K), value = double(n),PACKAGE="SuppDists")$value
 }
 rinvGauss <-
@@ -694,7 +694,7 @@ function (n, nu, lambda)
     N <- max(length(nu), length(lambda))
     nu <- rep(nu, length.out = N)
     lambda <- rep(lambda, length.out = N)
-    .C("rinvGaussR", as.double(nu), as.double(lambda), as.integer(n), 
+    .C(`rinvGaussR`, as.double(nu), as.double(lambda), as.integer(n), 
         as.integer(N), value = double(n),PACKAGE="SuppDists")$value
 }
 rJohnson <-
@@ -728,7 +728,7 @@ function (n, parms)
     type <- vecFromList(5, parms)
     type <- sapply(type, tfun)
     M <- length(gamma)
-    .C("rJohnsonR", as.double(gamma), as.double(delta), as.double(xi), 
+    .C(`rJohnsonR`, as.double(gamma), as.double(delta), as.double(xi), 
         as.double(lambda), as.integer(type), as.integer(n), as.integer(M), 
         val = double(n),PACKAGE="SuppDists")$val
 }
@@ -739,7 +739,7 @@ function (n, N)
         length(n)
     else n
     M <- length(N)
-    .C("rKendallR", as.integer(N), as.integer(n), as.integer(M), 
+    .C(`rKendallR`, as.integer(N), as.integer(n), as.integer(M), 
         val = double(n),PACKAGE="SuppDists")$val
 }
 rKruskalWallis <-
@@ -753,7 +753,7 @@ function (n, c, N, U)
     N <- rep(N, length.out = M)
     U <- rep(U, length.out = M)
     Ns <- rep(FALSE, length.out = M)
-    .C("rKruskalWallisR", randArray = double(n), as.integer(n), 
+    .C(`rKruskalWallisR`, randArray = double(n), as.integer(n), 
         as.integer(M), as.integer(c), as.integer(N), as.double(U), 
         as.integer(Ns),PACKAGE="SuppDists" )$randArray
 }
@@ -766,18 +766,20 @@ function (n, df, k)
     M <- max(length(df), length(k))
     df <- rep(df, length.out = M)
     k <- rep(k, length.out = M)
-    .C("rmaxFratioR", as.integer(df), as.integer(k), as.integer(n), 
+    .C(`rmaxFratioR`, as.integer(df), as.integer(k), as.integer(n), 
         as.integer(M), value = double(n),PACKAGE="SuppDists")$value
 }
-rMWC1019 <-
-function (n, new.start = FALSE, seed = 556677) 
-{
-    n <- if (length(n) == 1) 
-        n
-    else length(n)
-    .C("MWC1019R", val = double(n), as.integer(n), as.integer(new.start), 
-        as.integer(seed),PACKAGE="SuppDists")$val
-}
+## .Defunct
+## no alternative
+#rMWC1019 <-
+#function (n, new.start = FALSE, seed = 556677) 
+#{
+#    n <- if (length(n) == 1) 
+#        n
+#    else length(n)
+#    .C(`MWC1019R`, val = double(n), as.integer(n), as.integer(new.start), 
+#        as.integer(seed),PACKAGE="SuppDists")$val
+#}
 rNormScore <-
 function (n, c, N, U) 
 {
@@ -789,7 +791,7 @@ function (n, c, N, U)
     N <- rep(N, length.out = M)
     U <- rep(U, length.out = M)
     Ns <- rep(TRUE, length.out = M)
-    .C("rKruskalWallisR", randArray = double(n), as.integer(n), 
+    .C(`rKruskalWallisR`, randArray = double(n), as.integer(n), 
         as.integer(M), as.integer(c), as.integer(N), as.double(U), 
         as.integer(Ns),PACKAGE="SuppDists" )$randArray
 }
@@ -802,7 +804,7 @@ function (n, N, rho = 0)
     M <- max(length(rho), length(N))
     rho <- rep(rho, length.out = M)
     N <- rep(N, length.out = M)
-    .C("rcorrR", as.double(rho), as.integer(N), as.integer(n), 
+    .C(`rcorrR`, as.double(rho), as.integer(N), as.integer(n), 
         as.integer(M), val = double(n),PACKAGE="SuppDists")$val
 }
 rSpearman <-
@@ -815,18 +817,21 @@ function (n, r)
     r <- rep(r, length.out = M)
     N <- rep(2, length.out = M)
     rho <- rep(TRUE, length.out = M)
-    .C("rFriedmanR", as.integer(r), as.integer(N), as.integer(rho), 
+    .C(`rFriedmanR`, as.integer(r), as.integer(N), as.integer(rho), 
         as.integer(n), as.integer(M), value = double(n),PACKAGE="SuppDists")$value
 }
-rziggurat <-
-function (n, normal = TRUE, new.start = FALSE, seed = 556677) 
-{
-    n <- if (length(n) > 1) 
-        length(n)
-    else n
-   .C("ziggR", val = double(n), as.integer(n), as.integer(normal), 
-        as.integer(new.start), as.integer(seed),PACKAGE="SuppDists")$val
-}
+## use .Defunct function?
+## see ~/src/R/R-3.5.1/src/library/base/man/base-defunct.Rd
+## suggest package RcppZiggurat instead
+#rziggurat <-
+#function (n, normal = TRUE, new.start = FALSE, seed = 556677) 
+#{
+#    n <- if (length(n) > 1) 
+#        length(n)
+#    else n
+#   .C(`ziggR`, val = double(n), as.integer(n), as.integer(normal), 
+#        as.integer(new.start), as.integer(seed),PACKAGE="SuppDists")$val
+#}
 sFriedman <-
 function (r, N) 
 {
@@ -834,7 +839,7 @@ function (r, N)
     r <- rep(r, length.out = M)
     N <- rep(N, length.out = M)
     rho <- rep(FALSE, length.out = M)
-    value <- .C("sFriedmanR", as.integer(r), as.integer(N), as.integer(rho), 
+    value <- .C(`sFriedmanR`, as.integer(r), as.integer(N), as.integer(rho), 
         as.integer(M), mn = double(M), med = double(M), mod = double(M), 
         var = double(M), third = double(M), fourth = double(M),PACKAGE="SuppDists")
     aList <- list(title = "Friedman's chi-square", r = r, N = N)
@@ -848,7 +853,7 @@ function (a, k, N)
     a <- rep(a, length.out = M)
     k <- rep(k, length.out = M)
     N <- rep(N, length.out = M)
-    value <- .C("sghyperR", as.double(a), as.double(k), as.double(N), 
+    value <- .C(`sghyperR`, as.double(a), as.double(k), as.double(N), 
         as.integer(M), mn = double(M), med = double(M), mod = double(M), 
         var = double(M), third = double(M), fourth = double(M),PACKAGE="SuppDists")
     aList <- list(title = "Generalized Hypergeometric", a = a, 
@@ -903,7 +908,7 @@ function (parms)
     type <- vecFromList(5, parms)
     type <- sapply(type, tfun)
     N <- length(gamma)
-    value <- .C("sJohnsonR", as.double(gamma), as.double(delta), 
+    value <- .C(`sJohnsonR`, as.double(gamma), as.double(delta), 
         as.double(xi), as.double(lambda), as.integer(type), as.integer(N), 
         mn = double(N), med = double(N), mod = double(N), var = double(N), 
         third = double(N), fourth = double(N),PACKAGE="SuppDists")
@@ -921,7 +926,7 @@ function (N)
     mod <- rep(0, length.out = M)
     third <- rep(0, length.out = M)
     var <- (4 * N + 10)/(9 * N * (N - 1))
-    fourth <- .C("fourthKendallR", as.integer(N), as.integer(M), 
+    fourth <- .C(`fourthKendallR`, as.integer(N), as.integer(M), 
         val = double(M),PACKAGE="SuppDists")$val
     aList <- list(title = "Kendall's Tau", N = N)
     makeStatList(aList, mn, med, var, mod, third, fourth, -1)
@@ -934,7 +939,7 @@ function (c, N, U)
     n <- rep(N, length.out = M)
     U <- rep(U, length.out = M)
     Ns <- rep(FALSE, length.out = M)
-    value <- .C("sKruskalWallisR", as.integer(c), as.integer(n), 
+    value <- .C(`sKruskalWallisR`, as.integer(c), as.integer(n), 
         as.double(U), as.integer(Ns), as.integer(M), var = double(M), 
         mod = double(M), third = double(M), fourth = double(M),PACKAGE="SuppDists")
     mn <- (c - 1)
@@ -949,7 +954,7 @@ function (df, k)
     N <- max(length(df), length(k))
     df <- rep(df, length.out = N)
     k <- rep(k, length.out = N)
-    value <- .C("smaxFratioR", as.integer(df), as.integer(k), 
+    value <- .C(`smaxFratioR`, as.integer(df), as.integer(k), 
         as.integer(N), mn = double(N), med = double(N), mod = double(N), 
         var = double(N), third = double(N), fourth = double(N),PACKAGE="SuppDists")
     aList <- list(title = "Maximum F ratio", df = df, k = k)
@@ -964,7 +969,7 @@ function (c, N, U)
     n <- rep(N, length.out = M)
     U <- rep(U, length.out = M)
     Ns <- rep(TRUE, length.out = M)
-    value <- .C("sKruskalWallisR", as.integer(c), as.integer(n), 
+    value <- .C(`sKruskalWallisR`, as.integer(c), as.integer(n), 
         as.double(U), as.integer(Ns), as.integer(M), var = double(M), 
         mod = double(M), third = double(M), fourth = double(M),PACKAGE="SuppDists")
     mn <- (c - 1)
@@ -979,7 +984,7 @@ function (N, rho = 0)
     M <- max(length(rho), length(N))
     rho <- rep(rho, length.out = M)
     N <- rep(N, length.out = M)
-    value <- .C("scorrR", as.double(rho), as.integer(N), as.integer(M), 
+    value <- .C(`scorrR`, as.double(rho), as.integer(N), as.integer(M), 
         mn = double(M), med = double(M), mod = double(M), var = double(M), 
         third = double(M), fourth = double(M),PACKAGE="SuppDists")
     aList <- list(title = "Correlation coefficient", rho = rho, 
@@ -994,7 +999,7 @@ function (r)
     r <- rep(r, length.out = M)
     N <- rep(2, length.out = M)
     rho <- rep(TRUE, length.out = M)
-    value <- .C("sFriedmanR", as.integer(r), as.integer(N), as.integer(rho), 
+    value <- .C(`sFriedmanR`, as.integer(r), as.integer(N), as.integer(rho), 
         as.integer(M), mn = double(M), med = double(M), mod = double(M), 
         var = double(M), third = double(M), fourth = double(M),PACKAGE="SuppDists")
     aList <- list(title = "Spearman's rho", r = r)
@@ -1004,7 +1009,7 @@ function (r)
 tghyper <-
 function (a, k, N) 
 {
-    value <- .C("tghyperR", as.double(a), as.double(k), as.double(N), 
+    value <- .C(`tghyperR`, as.double(a), as.double(k), as.double(N), 
         strn =paste(rep(" ", 128), collapse=""),PACKAGE="SuppDists"  )
 	value$strn
 }

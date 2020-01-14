@@ -44,7 +44,7 @@ Kendall, M. (1975). \emph{Rank Correlation Methods.} Griffin, London.
 }
 
 \author{
-	Bob Wheeler \email{bwheelerg@gmail.com}
+	Bob Wheeler 
 }
 \examples{
 

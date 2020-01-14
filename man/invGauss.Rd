@@ -82,7 +82,7 @@ Zigangirov, K.S. (1962). Expression for the Wald distribution in terms of normal
 }
 
 \author{
-	Bob Wheeler \email{bwheelerg@gmail.com}
+	Bob Wheeler 
 }
 \examples{
 

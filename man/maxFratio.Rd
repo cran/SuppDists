@@ -58,7 +58,7 @@ Nelson, L.S. (1987). Upper 10\%, 5\% and 1\% points of the maximum F-ratio, \emp
 }
 
 \author{
-	Bob Wheeler \email{bwheelerg@gmail.com}
+	Bob Wheeler 
 }
 \examples{
 

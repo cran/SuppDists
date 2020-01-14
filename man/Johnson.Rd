@@ -69,7 +69,7 @@ Wheeler, R.E. (1980). Quantile estimators of Johnson curve parameters. \emph{Bio
 }
 
 \author{
-	Bob Wheeler \email{bwheelerg@gmail.com}
+	Bob Wheeler 
 }
 \examples{
 

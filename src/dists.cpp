@@ -4236,7 +4236,14 @@ void sJohnson(
 	switch (parms.type)	{
 		case SN:
 				mean=xi-gamma*lambda/delta;
-				median=mode=mean=mean;
+		  
+		  /* median=mode=mean=mean; */
+		  /* warning: explicitly assigning value of 
+		   * variable of type 'double' to itself [-Wself-assign]
+		   * 
+		   * fixed 2020-01-04 T Pohlert */
+		  
+		    median=mode=mean;
 				variance=lambda/delta;
 				variance*=variance;
 				thirdMoment=0.0;
@@ -6038,7 +6045,8 @@ ULONG zSeed=362436069, wSeed=521288629;
 static int nSeed=1020;
 static ULONG Q[1020];   // using Q[endQ] to hold variable.
 static int endQ=nSeed-1;
-static bool QInitialized=false; // Makes sure Q is initialized at least once
+static bool QInitialized=FALSE; // Makes sure Q is initialized at least once
+//static bool QInitialized=false; // Makes sure Q is initialized at least once
 
 #ifdef CANTUSE
 // At present time, R allows only a 625 seed array 
@@ -6109,6 +6117,7 @@ DISTS_API void MWC1019R (
 	int i;
 	ULONG seed=*seedp;
 
+	QInitialized=TRUE; // added by Thorsten Pohlert 2020-01-06
 	if (*initializep) {
 		QInit(seed);
 		QInitialized=TRUE;	
@@ -6174,6 +6183,8 @@ DISTS_API void ziggR(
 	int N=*Np;
 	int i;
 
+	ziggInitialized=false; // Thorsten Pohlert 2020-01-06
+	
 	if (*initilizep) {
 		zigset(*seedp);
 		ziggInitialized=true;

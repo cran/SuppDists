@@ -1,3 +1,4 @@
+#include "wheeler.h"
 #define DISTS_API extern "C"
 
 enum hyperType {
@@ -16,8 +17,10 @@ enum hyperType {
 
 	/* Prototypes for dist functions */
 	// Functions marked with EX may throw exceptions
-DISTS_API void ziggR(double *randomVector,int *Np,bool *type,bool *initilizep,ULONG *seedp);
-DISTS_API void MWC1019R (double *randomVector,int *Np,bool *initializep,ULONG *seedp);
+	
+	// ziggR and MWC1019R should be defunct
+//DISTS_API void ziggR(double *randomVector,int *Np,bool *type,bool *initilizep,ULONG *seedp);
+//DISTS_API void MWC1019R (double *randomVector,int *Np,bool *initializep,ULONG *seedp);
 #ifdef CANTUSE
 DISTS_API void user_unif_init(ULONG seed);
 DISTS_API int *user_unif_nseed(void);

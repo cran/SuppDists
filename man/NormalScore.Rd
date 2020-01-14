@@ -61,7 +61,7 @@ Royston, J.P. (1982). Expected normal order statistics (exact and approximate) A
 }
 
 \author{
-	Bob Wheeler \email{bwheelerg@gmail.com}
+	Bob Wheeler 
 }
 \examples{
 
