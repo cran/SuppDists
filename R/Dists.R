@@ -1,3 +1,4 @@
+
 dFriedman <-
 function (x, r, N, log = FALSE) 
 {

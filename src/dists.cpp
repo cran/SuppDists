@@ -5825,7 +5825,7 @@ double NewtonRoot(
 
 // The following was moved to here so that ziggurat can use it
 // Marsaglia's multiply with cary
-
+/*
 static const double RANDCONST=2.32830643654e-10;
 
 ULONG zSeed=362436069, wSeed=521288629;
@@ -5835,7 +5835,7 @@ ULONG zSeed=362436069, wSeed=521288629;
 #define UNIFORM   ((zNew+wNew)*RANDCONST)
 #define setseed(A,B) zSeed=A;wSeed=B;
 #define getseed(A,B) A=zSeed;B=wSeed;
-
+*/
 /* The ziggurat method for RNOR and REXP
 
 Modified very slightly to remove some of the awkwardness of the original C code. In partcular, 
@@ -5857,7 +5857,7 @@ For details of the method, see Marsaglia and Tsang, "The ziggurat method
 for generating random variables", Journ. Statistical Software.
 */
 
-
+/*
 double nfix(void);
 double efix(void);
 
@@ -5869,10 +5869,12 @@ static ULONG    jcong;
 #define SHR3 (jz=jsr, jsr^=(jsr<<13), jsr^=(jsr>>17), jsr^=(jsr<<5),jz+jsr)
 #define CONG (jcong=69069*jcong+1234567)
 #define KISS ((IUNIFORM^CONG)+SHR3)
+*/
 /*Switched to KISS -- see Leong, et.al. (2005) A comment on the implementtion of the Ziggurat Method 
    Journal of statistical software 12-7, 1-4*/
 /*#define UNI (.5 + (signed)(SHR3) * .2328306e-9) 
   #define IUNI SHR3*/
+ /*
 #define UNI (.5 + (signed)(KISS) * .2328306e-9)
 #define IUNI KISS
 
@@ -5909,16 +5911,18 @@ inline double REXP(void)
 #define REXP (jz=SHR3, iz=jz&255, (    jz <ke[iz])? double(jz*we[iz]) : efix())
 
 #endif
-
+*/
 /* nfix() generates variates from the residue when rejection in RNOR occurs. */
+
+/*
 double nfix(void) {	
-	const double r = 3.442619855899; 	/* The starting of the right tail */	
+	const double r = 3.442619855899; 	// The starting of the right tail
 	double  x;
 	double  y;
 
 	repeat		
 		x=hz*wn[iz];
-		if(iz==0){	/* iz==0, handle the base strip */
+		if(iz==0){	// iz==0, handle the base strip
 			repeat	
 				x=-log(UNI)/r;  			
 				y=-log(UNI);			
@@ -5926,11 +5930,11 @@ double nfix(void) {
 			return (hz>0)? r+x : -r-x;		
 		}
 
-		/* iz>0, handle the wedges of other strips */		
+		// iz>0, handle the wedges of other strips
 		if( fn[iz]+UNI*(fn[iz-1]-fn[iz]) < exp(-.5*x*x) ) 
 			return x;
 
-		/* start all over */		
+		// start all over		
 		hz=SHR3;		
 		iz=hz&127;		
 		if(abs((signed)hz)<(signed)kn[iz]) 
@@ -5939,21 +5943,22 @@ double nfix(void) {
 
 }
 
+*/
 
+// efix() generates variates from the residue when rejection in REXP occurs.
 
-/* efix() generates variates from the residue when rejection in REXP occurs. */
-
+/*
 double efix(void)
 
 {	
 	double x;
 	repeat		
 		if(iz==0) 
-			return (7.69711-log(UNI));		/* iz==0 */
+			return (7.69711-log(UNI));		// iz==0
 		x=jz*we[iz];				
 		if( fe[iz]+UNI*(fe[iz-1]-fe[iz]) < exp(-x) ) 
 			return (x);
-		/* Start all over again */		
+		// Start all over again
 		jz=SHR3;		
 		iz=(jz&255);		
 		if(jz<ke[iz]) 
@@ -5961,11 +5966,12 @@ double efix(void)
 	forever
 
 }
+*/
 
 
+//--------This procedure sets the seed and creates the tables------
 
-/*--------This procedure sets the seed and creates the tables------*/
-
+/*
 void zigset(ULONG jsrseed) {	  
 	const double	m1 = 2147483648.0; 
 	const double	m2 = 4294967296.0;
@@ -5980,10 +5986,10 @@ void zigset(ULONG jsrseed) {
 		  
 	jsr=123456789; // moved to here to allow seed to control generation
 	jsr^=jsrseed;
-	setseed(jsrseed,jsrseed)  /* Added to support Leong et.al.*/
+	setseed(jsrseed,jsrseed)  // Added to support Leong et.al.
     jcong=jsrseed;
 
-	  /* Set up tables for RNOR */	  
+	  // Set up tables for RNOR
 	q=vn/exp(-.5*dn*dn);
 	kn[0]=(long)((dn/q)*m1);	  
 	kn[1]=0;		  
@@ -6001,7 +6007,7 @@ void zigset(ULONG jsrseed) {
 	}
 
 
-	  /* Set up tables for REXP */	  
+	  // Set up tables for REXP
 	q = ve/exp(-de);
 
 
@@ -6024,6 +6030,7 @@ void zigset(ULONG jsrseed) {
 
 }
 
+ */
 
 
 
@@ -6042,6 +6049,7 @@ ULONG zSeed=362436069, wSeed=521288629;
 #define getseed(A,B) A=zSeed;B=wSeed;
 */
 
+/*
 static int nSeed=1020;
 static ULONG Q[1020];   // using Q[endQ] to hold variable.
 static int endQ=nSeed-1;
@@ -6134,7 +6142,7 @@ DISTS_API void MWC1019R (
 
 
 }
-
+*/
 /*
 It will provide random 32-bit integers at the rate of 300 million per
 second
@@ -6172,6 +6180,7 @@ I welcome comments  on timings  or otherwise.
 
 George Marsaglia */
 
+/*
 DISTS_API void ziggR(
 	double *randomVector,
 	int *Np,
@@ -6206,6 +6215,7 @@ DISTS_API void ziggR(
 
 
 }
+*/
 
 DISTS_API void normOrdR(
 	double *sp,

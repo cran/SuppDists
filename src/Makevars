@@ -1,0 +1,2 @@
+## CXX17 does not compile properly
+CXX_STD = CXX11

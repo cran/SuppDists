@@ -1,6 +1,18 @@
 \name{NEWS}
 \title{SuppDists News}
 \encoding{UTF-8}
+\section{Changes in version 1.1-9.7 (2022-01-02)}{
+  \itemize{
+    \item The file \sQuote{Makevars} was added with flags 
+    \code{CXX_STD = CXX11}.
+  }
+}
+\section{Changes in version 1.1-9.6 (2020-01-18)}{
+  \itemize{
+    \item Cpp code of \sQuote{MWC1019R} and \sQuote{ziggR} 
+    was disabled.
+  }
+}
 \section{Changes in version 1.1-9.5 (2020-01-13)}{
   \itemize{
   \item The package that was written by Robert E. Wheeler
