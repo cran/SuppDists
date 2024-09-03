@@ -1,6 +1,9 @@
+#define R_NO_REMAP
 #include <new>
 #include <cmath>
 #include <cstdlib>
+
+
 
 // for Solaris
 using namespace std;
@@ -9,9 +12,10 @@ using namespace std;
 extern "C" int snprintf(char *str, size_t size, const char *format, ...);
 #endif
 
-#include "wheeler.h"
+
 #include <R.h>
 #include <Rmath.h>
+#include "wheeler.h"
 
 #include <cstring> // for memset
 
@@ -29,7 +33,7 @@ bool DllMain(void)
 
 static const double LOG10=2.3025850929940456840179915;
 static const double MAXEXP=LOG10*DBL_MAX_10_EXP;	// Maximum argument for exp()
-static const double TWOPI=2*PI;
+static const double TWOPI=2*M_PI;
 static const double SQRT2=1.414135623730950488;
 static const double LNGAMMAHALF=1.144729885849400174143427/2;	// log of gamma(1/2)=log(sqrt(PI))
 static const double LOG2=0.6931471805599453094172321;
@@ -2010,7 +2014,7 @@ static int InsertTypeInList(
 			DeleteFtype(workingTypes[i]);
 		}
 		nWorkingTypes=0;
-		error("\nInernal error in InsertTypeInList()");   // This will abort, but leave memory dirty
+		Rf_error("\nInernal error in InsertTypeInList()");   // This will abort, but leave memory dirty
 		return nWorkingTypes;
 	}
 		// Add the aType pointer to the workingTypes list
@@ -2271,7 +2275,7 @@ static bool GetFriedmanStatic(
 }
 
 void freeStoreException() {
-	error("\nOut of user-controlled memory");
+	Rf_error("\nOut of user-controlled memory");
 }
 
 /* 
@@ -3126,7 +3130,7 @@ void JohnsonMomentSu(
 			w=sqrt(w-1.0);
 		until(fabs(B1-z)<=TOLSU || count++>100);
 		if (count>100) {
-			error("\nToo many iterations");
+			Rf_error("\nToo many iterations");
 			return;
 		}
 		m/=w;
@@ -3526,7 +3530,7 @@ DISTS_API void JohnsonMomentFitR(
 	double B1=sqrtB1*sqrtB1;
 
 	if (B2<B1+1.0+TOLJ) {
-		error("\nMoment ratio in error");
+		Rf_error("\nMoment ratio in error");
 		return parms;  // Outside the upper limit.
 	}
 
@@ -3581,7 +3585,7 @@ DISTS_API void JohnsonMomentFitR(
 			return parms;
 		}
 		else {
-			error("\nCouldn't do an Sb fit");
+			Rf_error("\nCouldn't do an Sb fit");
 			return parms;
 		}
 	}
@@ -3668,7 +3672,7 @@ DISTS_API void JohnsonFitR(
 		solution=SL;
 		delta=zn/log(t);
 		if (! R_FINITE(delta)){
-			error("\nInfinite value in SL fit");
+			Rf_error("\nInfinite value in SL fit");
 		}
 	}
 	else
@@ -3680,7 +3684,7 @@ DISTS_API void JohnsonFitR(
 		delta=zn/(2.0*log(b));
 		b*=b;
  		if (t>b || t<1.0/b) {
-			error("\nBounded solution intermediate values out of range");
+			Rf_error("\nBounded solution intermediate values out of range");
 		}
 		double a=(t-b)/(1-t*b);
 		gamma=-delta*log(a);
@@ -3693,7 +3697,7 @@ DISTS_API void JohnsonFitR(
 		delta=zn/(2.0*log(b));
 		b*=b;
 		if (t>b || t<1.0/b) {
-			error("\nUnbounded solution intermediate values out of range");
+			Rf_error("\nUnbounded solution intermediate values out of range");
 		}
 		double a=(1-t*b)/(t-b);
 		gamma=-0.5*delta*log(a);
@@ -3793,14 +3797,14 @@ DISTS_API void pJohnsonR(
 			break;
 		case SB:
 				if (u<=0.0 || u>=1.0) {
-					error("\nSb values out of range.");
+					Rf_error("\nSb values out of range.");
 					return 0.0;
 				}
 				u/=(1-u);
 				u=log(u);
 			break;
 		default:
-			error("\nNo type");
+			Rf_error("\nNo type");
 			break;
 	}
 
@@ -4205,7 +4209,7 @@ void sJohnson(
 )
 {
 	if (fabs(parms.delta)<1e-13) {
-		error("\nSorry, can't do it");
+		Rf_error("\nSorry, can't do it");
 		return;
 	}
 
@@ -5113,7 +5117,7 @@ int  xhypergeometric(
 	x=minm(x,maxX);
 
 	if (0>p || p>1.)
-		error("\nProbability must be in the 0 to 1 range");
+		Rf_error("\nProbability must be in the 0 to 1 range");
 
    	bool larger=(p<=phypergeometric(x,a,n,N));
    	while (larger) {
@@ -5163,7 +5167,7 @@ DISTS_API void rghyperR(
 		else if (variety!=noType)
 			rgenhypergeometric(valuep,M,*ap,*np,*Np,variety);
 		else 
-			error("\nParameters are for no recognized type");
+			Rf_error("\nParameters are for no recognized type");
 	}
 	else { // Allow for random values for each element of nu and lambda
 		D=(M/K)+((M%K)?1:0);
@@ -5176,7 +5180,7 @@ DISTS_API void rghyperR(
 			else if (variety!=noType)
 				rgenhypergeometric(tArray,D,ap[j],np[j],Np[j],variety);
 			else 
-				error("\nParameters are for no recognized type");
+				Rf_error("\nParameters are for no recognized type");
 			for (k=0;k<D;k++) {
 				cloc=loc+k*K;
 				if (cloc<M)
@@ -5611,7 +5615,7 @@ int  xgenhypergeometric(
 	double m2=(m1*(b*(a+b-n)))/(N*(N-1.0));
 
 	if (0>p || p>1)
-		error("\nProbability must be in the 0 to 1 range");
+		Rf_error("\nProbability must be in the 0 to 1 range");
 
 	int x=(int)(0.5+m1+sqrt(m2)*qnorm(p,0,1,true,false));
 	x=maxm(0,x);
@@ -5765,7 +5769,7 @@ double NewtonRoot(
 		}
 
 		if (! R_FINITE(h)) {
-			error("\nInfinite value in NewtonRoot()");
+			Rf_error("\nInfinite value in NewtonRoot()");
 			return x;
 		}
 		z-=h;
@@ -5784,7 +5788,7 @@ double NewtonRoot(
     until(m++>MAXITERN || ! more);
 
 	if (m>MAXITERN) {
-		error("\nIteration limit exceeded in NewtonRoot()");
+		Rf_error("\nIteration limit exceeded in NewtonRoot()");
 	}
 
 	return x;
@@ -6287,13 +6291,13 @@ void nscor2(
     /* input parameter checks. */
 
     if (*n2 > *n / 2) {
-		error("\nn2>n");
+		Rf_error("\nn2>n");
     }
     if (*n <= 1) {
-		error("\nn<=1");
+		Rf_error("\nn<=1");
     }
     if (*n > 2000) {
-		warning("\nValues may be inaccurate because of the size of N");
+		Rf_warning("\nValues may be inaccurate because of the size of N");
     }
 
     s[0] = b1;

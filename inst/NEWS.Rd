@@ -1,6 +1,15 @@
 \name{NEWS}
 \title{SuppDists News}
 \encoding{UTF-8}
+\section{Changes in version 1.1-9.8 (2024-09-03)}{
+  \itemize{
+    \item PI was changed to M_PI in C++ files 
+    as requested by CRAN check for additional issues \sQuote{Strict}.
+    \item \code{Rf_} was prepended to function call \code{error} and \code{warning}
+    as requested by CRAN check for additional issues \sQuote{noRemap}.
+    \item Specified C++11 was dropped and \code{dists.cpp} revised accordingly.
+  }
+}
 \section{Changes in version 1.1-9.7 (2022-01-02)}{
   \itemize{
     \item The file \sQuote{Makevars} was added with flags 

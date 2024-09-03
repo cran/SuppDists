@@ -1,8 +1,8 @@
 Package: SuppDists
 Type: Package
 Title: Supplementary Distributions
-Version: 1.1-9.7
-Date: 2022-01-02
+Version: 1.1-9.8
+Date: 2024-09-03
 Authors@R: c(person(given = "Bob", family = "Wheeler", 
                     role = "aut"),
              person(given = "Thorsten", family = "Pohlert",
@@ -19,9 +19,9 @@ License: GPL (>= 2)
 NeedsCompilation: yes
 Depends: R (>= 3.3.0)
 Suggests: RcppZiggurat
-Packaged: 2022-01-02 12:50:22 UTC; thorsten
+Packaged: 2024-09-03 20:09:22 UTC; thorsten
 Author: Bob Wheeler [aut],
   Thorsten Pohlert [ctb, cre] (<https://orcid.org/0000-0003-3855-3025>)
 Maintainer: Thorsten Pohlert <thorsten.pohlert@gmx.de>
 Repository: CRAN
-Date/Publication: 2022-01-03 18:10:06 UTC
+Date/Publication: 2024-09-03 20:50:02 UTC
