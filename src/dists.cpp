@@ -24,10 +24,10 @@ extern "C" int snprintf(char *str, size_t size, const char *format, ...);
 
 // SuppDists by Robert E. Wheeler, March 2001
 
-bool DllMain(void)					 
+bool_int DllMain(void)					 
 {
 
-    return true;
+    return true_int;
 }
 
 
@@ -91,7 +91,7 @@ double fpchisq(
 )
 {
 	double nu=(double)df/2.0;
-	return dchisq(x,df,false)*((nu-1.0)/x-0.5);
+	return dchisq(x,df,false_int)*((nu-1.0)/x-0.5);
 }
 
 /******************************************************************************
@@ -165,8 +165,8 @@ double pinvGauss(
 
 	double a=sqrt(lambda/x);
 	double b=x/mu;
-	double p1=pnorm(a*(b-1.0),0,1,true,false);
-	double p2=pnorm(-a*(b+1.0),0,1,true,false);
+	double p1=pnorm(a*(b-1.0),0,1,true_int,false_int);
+	double p2=pnorm(-a*(b+1.0),0,1,true_int,false_int);
 
 	if (x<=0 || mu<=0 || lambda<=0)
 		return NA_REAL;
@@ -209,8 +209,8 @@ DISTS_API void uinvGaussR(
 
 	double a=sqrt(lambda/x);
 	double b=x/mu;
-	double q=1.0-pnorm(a*(b-1.0),0,1,true,false);
-	double p=pnorm(-a*(b+1.0),0,1,true,false);
+	double q=1.0-pnorm(a*(b-1.0),0,1,true_int,false_int);
+	double p=pnorm(-a*(b+1.0),0,1,true_int,false_int);
 
 	if (x<=0 || mu<=0 || lambda<=0)
 		return NA_REAL;
@@ -279,16 +279,16 @@ static double finvGaussP(double x){return finvGauss(x,gMu,gLambda);}
 //	double mode=-1.5*(mu*mu)/lambda+mu*sqrt(1.0+2.25*(mu*mu)/(lambda*lambda));
 	double z;
 	if (lambda/mu>2.0) {
-		z=(qnorm(p,0,1,true,false)-0.5*sqrt(mu/lambda))/sqrt(lambda/mu);
+		z=(qnorm(p,0,1,true_int,false_int)-0.5*sqrt(mu/lambda))/sqrt(lambda/mu);
 		z=mu*exp(z);
 	}
 	else {
-		z=lambda/(qgamma(1.0-p,0.5,1.0,true,false)*2.0);
+		z=lambda/(qgamma(1.0-p,0.5,1.0,true_int,false_int)*2.0);
 		if (z>mu/2.0) {		// too large for the gamma approx
-			z=mu*exp(qgamma(p,0.5,1.0,true,false)*0.1);  // this seems to work for the upper tail ???
+			z=mu*exp(qgamma(p,0.5,1.0,true_int,false_int)*0.1);  // this seems to work for the upper tail ???
 		}
 	}
-	z=NewtonRoot(z,true,dinvGaussP,finvGaussP,3e-8);
+	z=NewtonRoot(z,true_int,dinvGaussP,finvGaussP,3e-8);
 
 	return z;
 }
@@ -492,7 +492,7 @@ double   fpfdist(
 	double n2=nu2;
 	double a=0.5*n1-1.0;
 	double b=0.5*(n1+n2);
-	return df(x,nu1,nu2,false)*(a/x-b*n1/(n1+n2*x));
+	return df(x,nu1,nu2,false_int)*(a/x-b*n1/(n1+n2*x));
 }
 
 
@@ -529,7 +529,7 @@ DISTS_API void pKruskalWallisR(
 	int i;
 
 	for (i=0;i<N;i++)
-		valuep[i]=pKruskal_Wallis(Hp[i],cp[i],np[i],Up[i],(bool)doNormalScorep[i]);
+		valuep[i]=pKruskal_Wallis(Hp[i],cp[i],np[i],Up[i],(bool_int)doNormalScorep[i]);
 	
 }
 
@@ -539,7 +539,7 @@ DISTS_API void pKruskalWallisR(
 	int c,		 // number of treatments
 	int n,		 // Total number of observations
 	double U,		// Sum (1/ni), where ni is numb obs for each treatment
-	bool doNormalScore	 // do normal scores
+	bool_int doNormalScore	 // do normal scores
 )
 {
 	double C=c;
@@ -551,7 +551,7 @@ DISTS_API void pKruskalWallisR(
 	double d=((N-C)*(C-1.0)-V)/((N-1.0)*V);
 	double f1=(C-1.0)*d;
 	double f2=(N-C)*d;
-	return pbeta(H/(N-1.0),f1,f2,true,false);
+	return pbeta(H/(N-1.0),f1,f2,true_int,false_int);
 }
 
 DISTS_API void uKruskalWallisR(
@@ -568,7 +568,7 @@ DISTS_API void uKruskalWallisR(
 	int i;
 
 	for (i=0;i<N;i++)
-		valuep[i]=qKruskal_Wallis(Hp[i],cp[i],np[i],Up[i],(bool)doNormalScorep[i]);
+		valuep[i]=qKruskal_Wallis(Hp[i],cp[i],np[i],Up[i],(bool_int)doNormalScorep[i]);
 	
 }
 
@@ -578,7 +578,7 @@ DISTS_API void uKruskalWallisR(
 	int c,		 // number of treatments
 	int n,		 // Total number of observations
 	double U,		// Sum (1/ni), where ni is numb obs for each treatment
-	bool doNormalScore	 // do normal scores
+	bool_int doNormalScore	 // do normal scores
 )
 {
 
@@ -602,7 +602,7 @@ DISTS_API void qKruskalWallisR(
 	int i;
 
 	for (i=0;i<N;i++)
-		valuep[i]=xKruskal_Wallis(pp[i],cp[i],np[i],Up[i],(bool)doNormalScorep[i]);
+		valuep[i]=xKruskal_Wallis(pp[i],cp[i],np[i],Up[i],(bool_int)doNormalScorep[i]);
 }	
 
  double  xKruskal_Wallis(
@@ -610,7 +610,7 @@ DISTS_API void qKruskalWallisR(
 	int c,		 // number of treatments
 	int n,		 // Total number of observations
 	double U,		// Sum (1/ni), where ni is numb obs for each treatment
-	bool doNormalScore	 // do normal scores
+	bool_int doNormalScore	 // do normal scores
 )
 {
 	double C=c;
@@ -625,7 +625,7 @@ DISTS_API void qKruskalWallisR(
 	double f1=(C-1.0)*d;
 	double f2=(N-C)*d;
 
-	return (N-1.0)*qbeta(P,f1,f2,true,false);
+	return (N-1.0)*qbeta(P,f1,f2,true_int,false_int);
 }
 
 	// Statistics for Kruskal_Wallis and Normal Scores
@@ -645,7 +645,7 @@ DISTS_API void sKruskalWallisR(
 	int i;
 
 	for (i=0;i<N;i++) {
-		sKruskal_Wallis(cp[i],np[i],Up[i],(bool)doNormalScorep[i],modep+i,thirdp+i,fourthp+i);
+		sKruskal_Wallis(cp[i],np[i],Up[i],(bool_int)doNormalScorep[i],modep+i,thirdp+i,fourthp+i);
 		if (Up[i]<=0 || Up[i]>KruskalWallisMaxU(cp[i],np[i])){
 			varp[i]=NA_REAL;
 		}
@@ -659,7 +659,7 @@ DISTS_API void sKruskalWallisR(
 	int c,
 	int n,
 	double U,
-	bool doNormalScore,
+	bool_int doNormalScore,
 	double *mode,
 	double *third,	// Central moments
 	double *fourth
@@ -718,7 +718,7 @@ DISTS_API void dKruskalWallisR(
 	int i;
 
 	for (i=0;i<N;i++)
-		valuep[i]=fKruskal_Wallis(Hp[i],cp[i],np[i],Up[i],(bool)doNormalScorep[i]);
+		valuep[i]=fKruskal_Wallis(Hp[i],cp[i],np[i],Up[i],(bool_int)doNormalScorep[i]);
 }	
 
 	// Use numerical derivitive
@@ -727,7 +727,7 @@ DISTS_API void dKruskalWallisR(
 	int c,		 // number of treatments
 	int n,		 // Total number of observations
 	double U,		// Sum (1/ni), where ni is numb obs for each treatment
-	bool doNormalScore	 // do normal scores
+	bool_int doNormalScore	 // do normal scores
 )
 {
 	double delta=0.001;
@@ -746,7 +746,7 @@ DISTS_API void rKruskalWallisR(
 	int *cp,
 	int *np,
 	double *Up,
-	bool *doNormalScorep
+	bool_int *doNormalScorep
 )
 {
 	int N=*Np;
@@ -759,7 +759,7 @@ DISTS_API void rKruskalWallisR(
 	double *tArray;
 
 	if (M==1) 
-		rKruskal_Wallis(randArrayp,N,*cp,*np,*Up,(bool)*doNormalScorep);
+		rKruskal_Wallis(randArrayp,N,*cp,*np,*Up,(bool_int)*doNormalScorep);
 	else { // Allow for random values for each element of nu and lambda
 		D=(N/M)+((N%M)?1:0);
 		tArray=(double *)S_alloc((long)D,sizeof(double));
@@ -784,7 +784,7 @@ DISTS_API void rKruskalWallisR(
 	int c,		 // number of treatments
 	int n,		 // Total number of observations
 	double U,		// Sum (1/ni), where ni is numb obs for each treatment
-	bool doNormalScore	 // do normal scores
+	bool_int doNormalScore	 // do normal scores
 )
 {
 	GetRNGstate();
@@ -837,7 +837,7 @@ double varNormalScores(
 	double e2=0.0;
 	double e4=0.0;
 	for (long i=1L;i<=n;i++) {
-		double e=qnorm(((double)i-alpha)/(N+den),0,1,true,false);
+		double e=qnorm(((double)i-alpha)/(N+den),0,1,true_int,false_int);
 		e*=e;
 		e2+=e;
 		e4+=e*e;
@@ -901,7 +901,7 @@ static void fills(
 static double kendexact(
 	int N,
 	int T,
-	bool density   // When true, returns the prob at T
+	bool_int density   // When true_int, returns the prob at T
 )
 {
 	// a is an array containing n! times the individual probabilities
@@ -969,7 +969,7 @@ DISTS_API void pKendallR(
 		return 1.0;
 	}
 	if (ni<=MAXKENDALEXACT) {
-		return kendexact(ni,k,false);
+		return kendexact(ni,k,false_int);
 	}
 
 	double s=n*(n+1)*(2.0*n+1.0)/6.0;
@@ -981,7 +981,7 @@ DISTS_API void pKendallR(
 	sd=sqrt(sd/12.0);
 	double x=(t+CONTCORRK-mean)/sd;
 	double z=phi0(x);
-	double P=pnorm(x,0,1,true,false);
+	double P=pnorm(x,0,1,true_int,false_int);
 	P+=((35*l4*l4*phi7(x,z)/56.0+l6*phi5(x,z))/30.0+l4*phi3(x,z))/24.0;
 
 	return P;
@@ -1062,7 +1062,7 @@ DISTS_API void dKendallR(
 		return 0.0;
 	}
 	if (ni<=MAXKENDALEXACT) {
-		return kendexact(ni,k,true);
+		return kendexact(ni,k,true_int);
 	}
 
 	double s=n*(n+1)*(2.0*n+1.0)/6.0;
@@ -1075,7 +1075,7 @@ DISTS_API void dKendallR(
 
 	double x=(t+CONTCORRK-mean)/sd;
 	double z=phi0(x);
-	double P1=pnorm(x,0,1,true,false);
+	double P1=pnorm(x,0,1,true_int,false_int);
 	P1+=((35*l4*l4*phi7(x,z)/56.0+l6*phi5(x,z))/30.0+l4*phi3(x,z))/24.0;
 
 	t-=1.0;
@@ -1083,7 +1083,7 @@ DISTS_API void dKendallR(
 	if (t>=0.0) {
 		x=(t+CONTCORRK-mean)/sd;
 		z=phi0(x);
-		P0=pnorm(x,0,1,true,false);
+		P0=pnorm(x,0,1,true_int,false_int);
 		P0+=((35*l4*l4*phi7(x,z)/56.0+l6*phi5(x,z))/30.0+l4*phi3(x,z))/24.0;
 	}
 
@@ -1142,10 +1142,10 @@ DISTS_API void qKendallR(
 	double mean=0.25*n*(n-1);
 	double sd=n*(2*n+1)*(n+1)/6-n;
 	sd=sqrt(sd/12.0);
-	long k=(long)(.5+mean+sd*qnorm(pr,0,1,true,false));
+	long k=(long)(.5+mean+sd*qnorm(pr,0,1,true_int,false_int));
 
 	double tau=4.0*(double)k/(n*(n-1.0))-1.0;
-	bool larger=(pr<=pkendall(ni,tau));
+	bool_int larger=(pr<=pkendall(ni,tau));
 
 	if (0>=pr || pr>=1 || ni<2)
 		return NA_REAL;
@@ -1254,7 +1254,7 @@ static double pmaxFRatioIntegrand(
 )
 {
 	double logV=logC-0.5*x;
-	logV+=(0.5*(double)df-1.0)*log(x)+(double)(N-1)*log(pchisq(x*F,df,true,false)-pchisq(x,df,true,false));
+	logV+=(0.5*(double)df-1.0)*log(x)+(double)(N-1)*log(pchisq(x*F,df,true_int,false_int)-pchisq(x,df,true_int,false_int));
 	return exp(logV);
 }
 
@@ -1286,14 +1286,14 @@ DISTS_API void pmaxFratioR(
 		return NA_REAL;
 
 	if (N equals 2) {
-		return 1-2*(1.0-pf(F,(double)df,(double)df,true,false));
+		return 1-2*(1.0-pf(F,(double)df,(double)df,true_int,false_int));
 	}
 
 		// Calculate a root of the constant to scale x in pmaxFRatioIntegrand()
 	double logC=log((double)(N))-(0.5*(double)df)*LOG2-loggamma(0.5*(double)df);
 
-	double upperLimit=qchisq(0.9999,df,true,false);
-	double lowLimit=qchisq(0.0001,df,true,false);
+	double upperLimit=qchisq(0.9999,df,true_int,false_int);
+	double lowLimit=qchisq(0.0001,df,true_int,false_int);
 	double h=upperLimit-lowLimit;   //  range of integration
 
 	const double MRatioTol=1e-4;  // result to this accuracy
@@ -1397,7 +1397,7 @@ static double fmaxFRatioIntegrand(
 
 	double logV=logC-0.5*x*(1.0+F);
 	logV+=((double)df-1.0)*log(x)+(0.5*(double)df-1.0)*log(F)+
-			(double)(N-2)*log(fabs(pchisq(x*F,df,true,false)-pchisq(x,df,true,false)));  // fabs because F can be less than 1
+			(double)(N-2)*log(fabs(pchisq(x*F,df,true_int,false_int)-pchisq(x,df,true_int,false_int)));  // fabs because F can be less than 1
 	return exp(logV);
 }
 
@@ -1428,13 +1428,13 @@ DISTS_API void dmaxFratioR(
 		return NA_REAL;
 
 	if (N equals 2) {
-		return (2.0*df(F,(double)dgf,(double)dgf,false));
+		return (2.0*df(F,(double)dgf,(double)dgf,false_int));
 	}
 		// Calculate a root of the constant to scale x in fmaxFRatioIntegrand()
 	double logC=log((double)(N*(N-1)))-(double)dgf*LOG2-2.0*loggamma((double)dgf/2.0);
 
-	double upperLimit=qchisq(0.9999,dgf,true,false);
-	double lowLimit=qchisq(0.0001,dgf,true,false);
+	double upperLimit=qchisq(0.9999,dgf,true_int,false_int);
+	double lowLimit=qchisq(0.0001,dgf,true_int,false_int);
 	double h=upperLimit-lowLimit;   //  range of integration
 
 	const double MRatioTol=1e-4;  // result to this accuracy
@@ -1559,7 +1559,7 @@ DISTS_API void qmaxFratioR(
 
 	// This dist is a folded F
 	if (N equals 2) {
-		return qf(1.0-0.5*(1.0-p),(double)dgf,(double)dgf,true,false);
+		return qf(1.0-0.5*(1.0-p),(double)dgf,(double)dgf,true_int,false_int);
 	}
 
 		// Can actually do a little better, especiall for larger df, but this is safe
@@ -1571,7 +1571,7 @@ DISTS_API void qmaxFratioR(
 	double x=xjohnson(p,parms);
 	x=maxm(1.000001,x);	// Johnson sometimes comes up with a value less than 1
 
-	bool more=true;
+	bool_int more=true_int;
 	double h;
 	double ho=1e6;
 	int m=0;
@@ -1580,7 +1580,7 @@ DISTS_API void qmaxFratioR(
 		x+=h;
 		more=(fabs(h/x)>TOLNEWTON);
 		if (ho<fabs(h))	{
-			more=false;
+			more=false_int;
 			x-=h;
 		}
 		ho=fabs(h);
@@ -1829,14 +1829,14 @@ struct Ftype {
 //		i=0...r-1
 // PermuteFike maps these into permutations of the original r marks
 
-static bool UpdateTheKey(
+static bool_int UpdateTheKey(
 	int k,
 	int r,
 	int *key
 )
 {
 	if (k>=r-1) {
-	   return false;
+	   return false_int;
 	}
 	else 
 	if (key[k]) {
@@ -1844,7 +1844,7 @@ static bool UpdateTheKey(
 		for (int i=0;i<k;i++) {
 			key[i]=i+1;
 		}
-		return true;
+		return true_int;
 	}
 	else {
 		return UpdateTheKey(k+1,r,key);
@@ -1913,7 +1913,7 @@ static int IntPairCompare(
 	// Assumes that the R arrays are in increasing absolute order
 	// The types are the same if the S's are the same and the R arrays are either
 	//	the same or negatives of each other
-static bool IsSameType(
+static bool_int IsSameType(
 	int r,
 	int n,
 	Ftype* aType,
@@ -1923,19 +1923,19 @@ static bool IsSameType(
 	int i;
 
 	if (aType->S!=workingType->S) {
-		return false;
+		return false_int;
 	}
 
 		// No need to check further in this case, since only one set of permutations
 		// are used -- the second generation types are the final generation
   	if (n equals 2) {
-		return true;
+		return true_int;
 	}
 
 
 	for (i=0;i<r;i++) {
 		if (abs(aType->R[i])!=abs(workingType->R[i])) {
-			return false;
+			return false_int;
 		}
 	}
 
@@ -1955,10 +1955,10 @@ static bool IsSameType(
 	qsort((void*)R1,(size_t)r,sizeof(int),IncreasingIntcmpf);
 	qsort((void*)R2,(size_t)r,sizeof(int),IncreasingIntcmpf);
 
-	bool sameType=true;
+	bool_int sameType=true_int;
 	for (i=0;i<r;i++) {
 		if (R1[i]!=R2[i]) {
-			sameType=false;
+			sameType=false_int;
 			break;
 		}
 	}
@@ -1970,7 +1970,7 @@ static bool IsSameType(
 
 		for (i=0;i<r;i++) {
 			if (R2[i]!=R1[i]) {
-				sameType=false;
+				sameType=false_int;
 				break;
 			}
 		}
@@ -2159,14 +2159,14 @@ static FriedmanStrc* MakeFriedmanStrc(
 	// NOTE: r==2 is always calcualted because it takes little time
 	//	The same could be done for small n's
 
-static bool GetFriedmanStatic(
+static bool_int GetFriedmanStatic(
 	int r,
 	int n,
 	FriedmanStrc** theStrc
 )
 {
 	FriedmanValues* theValues=0L;
-	bool isInTables=true;
+	bool_int isInTables=true_int;
 
 	if (n equals 2) {
 		switch (r) {
@@ -2181,7 +2181,7 @@ static bool GetFriedmanStatic(
 			case 11: theValues=(FriedmanValues*)FriedmanData11_2; break;
 				// Tried r==12, but it took 18 hrs and then bombed??
 			default:	theValues=0L;
-						isInTables=false;
+						isInTables=false_int;
 						break;
 		}
 	}
@@ -2217,7 +2217,7 @@ static bool GetFriedmanStatic(
 			case 29:	theValues=(FriedmanValues*)FriedmanData3_29; break;
 			case 30:	theValues=(FriedmanValues*)FriedmanData3_30; break;
 			default:	theValues=0L;
-						isInTables=false;
+						isInTables=false_int;
 						break;
 		}
 	}
@@ -2238,7 +2238,7 @@ static bool GetFriedmanStatic(
 			case 14: theValues=(FriedmanValues*)FriedmanData4_14; break;
 			case 15: theValues=(FriedmanValues*)FriedmanData4_15; break;
 			default:	theValues=0L;
-						isInTables=false;
+						isInTables=false_int;
 						break;
 		}
 	}
@@ -2252,12 +2252,12 @@ static bool GetFriedmanStatic(
 			case 7: theValues=(FriedmanValues*)FriedmanData5_7; break;
 			case 8: theValues=(FriedmanValues*)FriedmanData5_8; break;
 			default:	theValues=0L;
-						isInTables=false;
+						isInTables=false_int;
 						break;
 		}
 	}
 	else {
-		isInTables=false;
+		isInTables=false_int;
 	}
 	if (isInTables) {
 		(*theStrc)=new FriedmanStrc;
@@ -2269,9 +2269,9 @@ static bool GetFriedmanStatic(
 			(*theStrc)->S[i]=theValues[i+1].S;
 			(*theStrc)->qdist[i]=theValues[i+1].qdist;
 		}
-		return true;
+		return true_int;
 	}
-	return false;
+	return false_int;
 }
 
 void freeStoreException() {
@@ -2309,7 +2309,7 @@ FriedmanStrc* FriedmanExact(
 		//		(1-r)/2,(3-r)/2,...,(r-1)/2	    for odd r
 		//		(1-r),(3-r),...,(r-1)			for even r
 	int *base=new int[r];
-	bool even=(0 equals r%2);
+	bool_int even=(0 equals r%2);
 	int step=even?2:1;
 	int x=even?1-r:(1-r)/2;
 	for (i=0;i<r;i++) {
@@ -2367,11 +2367,11 @@ FriedmanStrc* FriedmanExact(
 }
 
 
-	// Returns true if ok to do exact Friedman calculation
-bool DoExactFriedman(
+	// Returns true_int if ok to do exact Friedman calculation
+bool_int DoExactFriedman(
 	int r,
 	int n,
-	bool doRho
+	bool_int doRho
 )
 {
 	if (doRho) {  // Spearman's rho -- see limit comment below
@@ -2387,18 +2387,18 @@ bool DoExactFriedman(
 			case 4: return (n<=15); break;
 			case 5: return (n<=8); break; // changed from 10 to 8
 				// Can't reasonably do larger cases because of array and time limits
-			default: return false; break;
+			default: return false_int; break;
 		}
 	}
-	return false;	
+	return false_int;	
 }
 
 
 /*	This is needed because not all even integers are in S[]
-	If lower is true:	
+	If lower is true_int:	
 		Finds smallest k such that S[k]>SS -- thus qdist[k] is area above SS and
 			1-qdist[k] is area up to and including SS
-	If lower is false:
+	If lower is false_int:
 		Finds largest k such that S[k]<=SS -- thus qdist[k] is are above and including
 			SS.
 */
@@ -2407,14 +2407,14 @@ static int FriedmanFindS(
 	int maxS,
 	int *S,
 	int nS,
-	bool lower
+	bool_int lower
 )
 {
 
 	double guess=(double)SS/(double)maxS;
 	int k=(int)((double)(nS-1)*guess);
 
-	bool larger=(lower)?S[k]>SS:S[k]>=SS;
+	bool_int larger=(lower)?S[k]>SS:S[k]>=SS;
 	while (larger) {
 		if (k equals 0) {
 			return k;
@@ -2450,9 +2450,9 @@ static int FriedmanFindS(
 }
 
 // deletes S and qdist for the current global
-// Also deletes the global struct if deleteAll it true
+// Also deletes the global struct if deleteAll it true_int
 void ClearFriedmanGlobal(
-	bool deleteAll
+	bool_int deleteAll
 )
 {
 	delete [] FriedmanCurrentGlobal->theDist->S;
@@ -2466,22 +2466,22 @@ void ClearFriedmanGlobal(
 
 
 // Check for existence and feasible of the exact calculation.
-// Return true if it exists or it is feasible,
+// Return true_int if it exists or it is feasible,
 // and then set Q for a given s.
-static bool CheckFriedmanExactQ(
+static bool_int CheckFriedmanExactQ(
 	int r,
 	int n,
 	double s,
 	double* Q,
-	bool lower,
-	bool doRho	// When true s is Spearman's rho
+	bool_int lower,
+	bool_int doRho	// When true_int s is Spearman's rho
 )
 {
 	if (DoExactFriedman(r,n,doRho)) {
 		if (! FriedmanCurrentGlobal || FriedmanCurrentGlobal->r!=r ||
 			FriedmanCurrentGlobal->n!=n) {
 				if (FriedmanCurrentGlobal) {
-					ClearFriedmanGlobal(false);	 // Delete current S and theDist
+					ClearFriedmanGlobal(false_int);	 // Delete current S and theDist
 				}
 				else {	// Allocate a new global
 					FriedmanCurrentGlobal = new FriedmanGlobal;
@@ -2505,35 +2505,35 @@ static bool CheckFriedmanExactQ(
 		int maxS=theDist->S[nS-1];
 		int k=FriedmanFindS(SS,maxS,theDist->S,nS,lower);
 		*Q=theDist->qdist[k];
-		return true;
+		return true_int;
 	}
 	else {
 		if (FriedmanCurrentGlobal) {
-			ClearFriedmanGlobal(true);	// Delete and zero the current global
+			ClearFriedmanGlobal(true_int);	// Delete and zero the current global
 		}
-		return false;
+		return false_int;
 	}
 
 }
 
 
 // Check for existence and feasible of the exact calculation.
-// Return true if it exists or it is feasible,
+// Return true_int if it exists or it is feasible,
 // and then set F, the probabilty of exactly X.
-static bool CheckFriedmanExactF(
+static bool_int CheckFriedmanExactF(
 	int r,
 	int n,
 	double X,
 	double* F,
-	bool lower,
-	bool doRho	// When true s is Spearman's rho
+	bool_int lower,
+	bool_int doRho	// When true_int s is Spearman's rho
 )
 {
 	if (DoExactFriedman(r,n,doRho)) {
 		if (! FriedmanCurrentGlobal || FriedmanCurrentGlobal->r!=r ||
 			FriedmanCurrentGlobal->n!=n) {
 				if (FriedmanCurrentGlobal) {
-					ClearFriedmanGlobal(false);	 // Delete current S and theDist
+					ClearFriedmanGlobal(false_int);	 // Delete current S and theDist
 				}
 				else {	// Allocate a new global
 					FriedmanCurrentGlobal = new FriedmanGlobal;
@@ -2560,13 +2560,13 @@ static bool CheckFriedmanExactF(
 		if (k<nS-1) {
 			*F-=theDist->qdist[k+1];
 		}
-		return true;
+		return true_int;
 	}
 	else {
 		if (FriedmanCurrentGlobal) {
-			ClearFriedmanGlobal(true);	// Delete and zero the current global
+			ClearFriedmanGlobal(true_int);	// Delete and zero the current global
 		}
-		return false;
+		return false_int;
 	}
 
 }
@@ -2586,7 +2586,7 @@ DISTS_API void pFriedmanR(
 	int *rp,
 	int *np,
 	int *Np,
-	bool *doRhop,
+	bool_int *doRhop,
 	double *valuep
 )
 {
@@ -2601,7 +2601,7 @@ DISTS_API void pFriedmanR(
 	double X,
 	int r,
 	int n,
-	bool doRho	 // When true, X is Spearman's rho
+	bool_int doRho	 // When true_int, X is Spearman's rho
 )
 {
 	double Q;
@@ -2628,14 +2628,14 @@ DISTS_API void pFriedmanR(
 	S=maxm(1L,iS);
 
 
-	if (CheckFriedmanExactQ(r,n,X,&Q,true,doRho)) {
+	if (CheckFriedmanExactQ(r,n,X,&Q,true_int,doRho)) {
 		return 1.0-Q;	 // Lower tail including X exactly
 	}
 	else {
 		double W=(S-1.0)/(M+2.0); // Corrected for continuity
 		double a=(double)(r-1)-2.0/(double)n;
 		double b=a*(double)(n-1);
-		return 1.0-pbeta(1.0-W,b/2.0,a/2.0,true,false);
+		return 1.0-pbeta(1.0-W,b/2.0,a/2.0,true_int,false_int);
 	}
 }
 
@@ -2645,7 +2645,7 @@ DISTS_API void uFriedmanR(
 	int *rp,
 	int *np,
 	int *Np,
-	bool *doRhop,
+	bool_int *doRhop,
 	double *valuep
 )
 {
@@ -2660,7 +2660,7 @@ DISTS_API void uFriedmanR(
 	double X,
 	int r,
 	int n,
-	bool doRho	// When true X is Spearman's rho
+	bool_int doRho	// When true_int X is Spearman's rho
 )
 {
 	double Q;
@@ -2693,17 +2693,17 @@ DISTS_API void uFriedmanR(
 
 
 
-//	if (CheckFriedmanExactQ(r,n,X,&Q,false,doRho)) {
+//	if (CheckFriedmanExactQ(r,n,X,&Q,false_int,doRho)) {
 //		return Q;  // Upper tail area including X exactly
 // Changed to conform to R usage
-	if (CheckFriedmanExactQ(r,n,X,&Q,true,doRho)) {
+	if (CheckFriedmanExactQ(r,n,X,&Q,true_int,doRho)) {
 		return Q;  // Upper tail area excluding X exactly
 	}
 	else {
 		double W=(S-1.0)/(M+2.0); // Corrected for continuity
 		double a=(double)(r-1)-2.0/(double)n;
 		double b=a*(double)(n-1);
-		return pbeta(1.0-W,b/2.0,a/2.0,true,false);
+		return pbeta(1.0-W,b/2.0,a/2.0,true_int,false_int);
 	}
 }
 
@@ -2720,7 +2720,7 @@ double modefrie(
 	double delta=maxX/(double)(nPoints-1);
 	double X=0.0;
 	while (nPoints--){
-		double curVal=ffrie(X,r,n,false);
+		double curVal=ffrie(X,r,n,false_int);
 		if (modeVal<curVal) {
 			modeVal=curVal;
 			mode=X;
@@ -2736,7 +2736,7 @@ DISTS_API void dFriedmanR(
 	int *rp,
 	int *np,
 	int *Np,
-	bool *doRhop,
+	bool_int *doRhop,
 	double *valuep
 )
 {
@@ -2753,7 +2753,7 @@ DISTS_API void dFriedmanR(
 	double X,
 	int r,
 	int n,
-	bool doRho
+	bool_int doRho
 )
 {
 	double F;
@@ -2784,7 +2784,7 @@ DISTS_API void dFriedmanR(
 
 
 
-	if (CheckFriedmanExactF(r,n,X,&F,false,doRho)) {
+	if (CheckFriedmanExactF(r,n,X,&F,false_int,doRho)) {
 		return F;	// Exact probabilty at X
 	}
 	else {
@@ -2792,7 +2792,7 @@ DISTS_API void dFriedmanR(
 		double a=(double)(r-1)-2.0/(double)n;
 		double b=a*(double)(n-1);
 			// difference in densities at X
-		return pbeta(1.0-W,b/2.0,a/2.0,true,false)-pbeta(1.0-W-2.0/(M+2.0),b/2.0,a/2.0,true,false);
+		return pbeta(1.0-W,b/2.0,a/2.0,true_int,false_int)-pbeta(1.0-W-2.0/(M+2.0),b/2.0,a/2.0,true_int,false_int);
 	}
 }
 
@@ -2802,7 +2802,7 @@ DISTS_API void qFriedmanR(
 	int *rp,
 	int *np,
 	int *Np,
-	bool *doRhop,
+	bool_int *doRhop,
 	double *valuep
 )
 {
@@ -2819,7 +2819,7 @@ double  xfrie(
 	double P,
 	int r,
 	int n,
-	bool doRho		// When true X is Spearman's rho
+	bool_int doRho		// When true_int X is Spearman's rho
 )
 {
 	if (doRho)
@@ -2831,7 +2831,7 @@ double  xfrie(
 	double M=(double)(n*n*r*(r*r-1))/12.0;	// Max value of S
 	double a=(double)(r-1)-2.0/(double)n;
 	double b=a*(double)(n-1);
-	double W=1.0-qbeta(1.0-P,b/2.0,a/2.0,true,false); // W is corrected for continuity
+	double W=1.0-qbeta(1.0-P,b/2.0,a/2.0,true_int,false_int); // W is corrected for continuity
 	double S=1.0+(M+2.0)*W;
 	long iS=(long)ceil(S);
 
@@ -2852,7 +2852,7 @@ double  xfrie(
 	X=minm(MX,X);
 
 		// X must be such that P<=pfrie()
-	bool larger=(P<=pfrie(X,r,n,false));
+	bool_int larger=(P<=pfrie(X,r,n,false_int));
 	while (larger) {
 		if (X <= 0.0) {
 			X=0.0;
@@ -2860,10 +2860,10 @@ double  xfrie(
 		}
 		X-=step;
 		if (X<0.0) {
-			larger=false;
+			larger=false_int;
 		}
 		else
-			larger=(P<=pfrie(X,r,n,false));
+			larger=(P<=pfrie(X,r,n,false_int));
 		if (! larger) {
 			X+=step;
 			goto theEnd;
@@ -2875,7 +2875,7 @@ double  xfrie(
 			goto theEnd;
 		}
 		X+=step;
-		larger=(P<=pfrie(X,r,n,false));
+		larger=(P<=pfrie(X,r,n,false_int));
 		if (larger) {
 			goto theEnd;
 		}
@@ -2899,7 +2899,7 @@ theEnd:
 DISTS_API void rFriedmanR(
 	int *rp,
 	int *np,
-	bool *doRhop,
+	bool_int *doRhop,
 	int *Np,
 	int *Mp,
 	double *valuep
@@ -2941,7 +2941,7 @@ DISTS_API void rFriedmanR(
 	int N,	  // number of samples
 	int r,
 	int n,
-	bool doRho		// When true X is Spearman's rho
+	bool_int doRho		// When true_int X is Spearman's rho
 )
 {
 	GetRNGstate();
@@ -2962,14 +2962,14 @@ double medianfrie(
 	int n
 )
 {
-	if (! DoExactFriedman(r,n,false)) {
-		return xfrie(0.5,r,n,false);	// continuous approx
+	if (! DoExactFriedman(r,n,false_int)) {
+		return xfrie(0.5,r,n,false_int);	// continuous approx
 	}
 	else {
-		double high=xfrie(0.5,r,n,false);
-		double phigh=pfrie(high,r,n,false);
+		double high=xfrie(0.5,r,n,false_int);
+		double phigh=pfrie(high,r,n,false_int);
 		double low=high;
-		bool same=true;
+		bool_int same=true_int;
 		double plow;
 		double twoS=24.0/(double)(n*r*(r+1)); // Corresponds to 2 on the S scale
 		if (0 equals r%2) {
@@ -2978,7 +2978,7 @@ double medianfrie(
 			// find the next lower Friedman chi-square
 		while (same) {
 			low-=twoS;	
-			same=(phigh equals (plow=pfrie(low,r,n,false)));
+			same=(phigh equals (plow=pfrie(low,r,n,false_int)));
 		}
 		double alpha=(phigh-0.5)/(phigh-plow);
 		return alpha*low+(1.0-alpha)*high;	// interpolate
@@ -2988,7 +2988,7 @@ double medianfrie(
 DISTS_API void sFriedmanR(
 	int *rp,
 	int *np,
-	bool *rhop,
+	bool_int *rhop,
 	int *Np,
 	double *meanp,
 	double *medianp,
@@ -3069,9 +3069,9 @@ static void	Rotate3(
 	double w;
 	int i;
 	int j;
-	bool skip;
+	bool_int skip;
 
-	skip=false;
+	skip=false_int;
 	w=1.0;
 	for (i=0;i<2;i++) {
       if (!skip) {
@@ -3081,7 +3081,7 @@ static void	Rotate3(
 			matrix[i][i]=dp;
 			c=d/dp;
 			s=w*x/dp;
-			if (d equals 0.0) skip=true;      /* to avoid 0/0, but d can't be 0 */
+			if (d equals 0.0) skip=true_int;      /* to avoid 0/0, but d can't be 0 */
 			else w*=c;
 			for (j=i+1;j<3;j++) {
 				matrix[i][j]=s*v[j]+c*(r=matrix[i][j]);
@@ -3151,7 +3151,7 @@ void JohnsonMomentSu(
 
 
   	// Finds first N moments of Johnson SB, puts them in moments[]
-bool JohnsonMOM(
+bool_int JohnsonMOM(
 	double gamma,
 	double delta,
 	double* moments
@@ -3166,13 +3166,13 @@ bool JohnsonMOM(
 	const double expA=ln10*DBL_MAX_10_EXP;
 	const double expB=-log(DBL_EPSILON);
 
-	bool howExit=true;
+	bool_int howExit=true_int;
 	double oldMoments[N];
 	memset(oldMoments,0,N*sizeof(double));
 	double w=gamma/delta;
 
 	if (w>expA) {
-		return false;
+		return false_int;
 	}
 
 	double h=0.75;
@@ -3181,7 +3181,7 @@ bool JohnsonMOM(
 		h=delta/4.0;
 	}
 	int count=0;
-	bool more=false;
+	bool_int more=false_int;
 		// The outer loop
 	repeat
 			// Skip this the first time
@@ -3219,7 +3219,7 @@ bool JohnsonMOM(
 				z+=exp(u);
 			}
 			t+=f;
-			bool bL=t>expB;
+			bool_int bL=t>expB;
 			double s=0;
 			if (! bL) {
 				s=exp(t)+1.0;
@@ -3245,13 +3245,13 @@ bool JohnsonMOM(
   			}
 			y+=x;
 			v+=y;
-			more=false;
+			more=false_int;
 			for (i=0;i<N;i++) {
 				if (moments[i] equals 0.0) {
 					goto errExit;
 				}
 				if (fabs(moments[i]-b[i])/moments[i] > innerTol) {
-					more=true;
+					more=true_int;
 				}
 			}
 
@@ -3263,13 +3263,13 @@ bool JohnsonMOM(
 		 for (i=0;i<N;i++) {
 		 	moments[i]*=recipSqrtPi*h;
 		 }
-		 more=false;
+		 more=false_int;
 		 for (i=0;i<N;i++) {
 		 	if (moments[i] equals 0.0) {
 				goto errExit;
 			}
 			if (fabs(moments[i]-oldMoments[i])/moments[i]>outerTol) {
-				more=true;
+				more=true_int;
 			}
 		 } 
 
@@ -3279,13 +3279,13 @@ bool JohnsonMOM(
 	}
 
 errExit:
-	howExit=false;
+	howExit=false_int;
 theExit:
 	return howExit;
 }
 
 	// Fits the Johnson Sb
-bool JohnsonMomentSb(
+bool_int JohnsonMomentSb(
 	JohnsonParms& parms,
 	double mean,
 	double sd,
@@ -3298,10 +3298,10 @@ bool JohnsonMomentSb(
 	const int iterLimit=50;
 	const int N=6;		// Number of moments
 
-	bool howExit=true;
+	bool_int howExit=true_int;
 	double absSqrtB1=fabs(sqrtB1);
 	double B1=sqrtB1*sqrtB1;
-	bool negativeB1=(sqrtB1<0.0);
+	bool_int negativeB1=(sqrtB1<0.0);
 	
 		// Get first estimate of delta
 	double delta;
@@ -3349,8 +3349,8 @@ bool JohnsonMomentSb(
 	}
 
 	int count=0;
-	bool more=false;
-	bool errorSet=false;
+	bool_int more=false_int;
+	bool_int errorSet=false_int;
 	double moments[N];
 	double h2=0;
 	double oldDeltaGamma=100.0;
@@ -3431,7 +3431,7 @@ bool JohnsonMomentSb(
  		goto theExit;
 	}
 
-	howExit=false;
+	howExit=false_int;
 theExit:
 	return howExit;
 }
@@ -3809,7 +3809,7 @@ DISTS_API void pJohnsonR(
 	}
 
 	double z=parms.gamma+parms.delta*u;
-	return pnorm(z,0,1,true,false);
+	return pnorm(z,0,1,true_int,false_int);
 }
 
 /*
@@ -3884,7 +3884,7 @@ DISTS_API void qJohnsonR(
 	JohnsonParms parms
 )
 {
-	double z=qnorm(p,0,1,true,false);
+	double z=qnorm(p,0,1,true_int,false_int);
 	double u=(z-parms.gamma)/parms.delta;
 
 
@@ -3976,7 +3976,7 @@ DISTS_API void dJohnsonR(
 	}
 
 	double z=parms.gamma+parms.delta*fu;
-	return dnorm(z,0,1,false)*differential;
+	return dnorm(z,0,1,false_int)*differential;
 }
 
 /*
@@ -4020,7 +4020,7 @@ double fpjohnson(
 			break;
 	}
 
-	return dnorm(z,0,1,false)*differential;
+	return dnorm(z,0,1,false_int)*differential;
 }
 
 
@@ -4476,11 +4476,11 @@ static double dcorrelationP(double r){return -gpcorr + pcorrelation(r,grhocorr,g
 
 		// assume arctanh(R) is normal with expectation 0.5*log((1+rho)/(1-rho))
 		// and variance 1/(N-3) -- See Johnson and Kotz Vol2, first Ed, 229
-	double z=0.5*log((1.0+rho)/(1.0-rho))+qnorm(p,0,1,true,false)/sqrt((double)(N-3));
+	double z=0.5*log((1.0+rho)/(1.0-rho))+qnorm(p,0,1,true_int,false_int)/sqrt((double)(N-3));
 	z=exp(2.0*z);
 	double guess=(z-1.0)/(z+1.0);
 
-	return NewtonRoot(guess,false,dcorrelationP,fcorrelationP,3e-8);
+	return NewtonRoot(guess,false_int,dcorrelationP,fcorrelationP,3e-8);
 }
 
 
@@ -4697,7 +4697,7 @@ double PeizerHypergeometric(
 
 	double z=((Ap*Dp-Bp*Cp)/fabs(A*D-B*C))*sqrt(2.0*L*((dm*dn*dr*ds*dNp)/(dmp*dnp*drp*dsp*dN)));
 	
-	return pnorm(z,0,1,true,false);
+	return pnorm(z,0,1,true_int,false_int);
 
 }
 
@@ -4714,8 +4714,8 @@ char *hyperNames[]= {
 	(char *)"no type"
 };
 
-	// Returns true if the double is an int
-bool isint(
+	// Returns true_int if the double is an int
+bool_int isint(
 	double x
 )
 {
@@ -4782,7 +4782,7 @@ hyperType typeHyper(
 	return variety;
 }
 
-bool checkHyperArgument(
+bool_int checkHyperArgument(
 	int k,
 	double a, 				// Sample size
 	double m,      	// Total number of marked items
@@ -4822,7 +4822,7 @@ bool checkHyperArgument(
 		case noType:
 			break;
 	}
-	return false;
+	return false_int;
 }
 
 	
@@ -4990,12 +4990,12 @@ double phypergeometric(
 
 		// Switch tails if necessesary to minimize number of terms to sum
 	int xmin=maxm(0,n+a-N);
-	bool lowerTail=true;
+	bool_int lowerTail=true_int;
 	if (x-xmin>n-x) {					  
 		x=n-x-1;
 		a=N-a;
 		xmin=maxm(0,n+a-N);
-		lowerTail=false;
+		lowerTail=false_int;
 	}
 
 	int na_N=n+a-N;	
@@ -5107,7 +5107,7 @@ int  xhypergeometric(
 	int N       		// Total number of items
 )
 {
-	double T=qchisq(1.0-p,1,true,false);
+	double T=qchisq(1.0-p,1,true_int,false_int);
 	double z=(T*(p*(1.0-p)*(double)(a*(N-a))))/(double)(N-1);
 	int x=(int)floor(0.5+p*(double)a+z*z);
 
@@ -5119,7 +5119,7 @@ int  xhypergeometric(
 	if (0>p || p>1.)
 		Rf_error("\nProbability must be in the 0 to 1 range");
 
-   	bool larger=(p<=phypergeometric(x,a,n,N));
+   	bool_int larger=(p<=phypergeometric(x,a,n,N));
    	while (larger) {
       	if (x equals minX) {
       		return x;
@@ -5251,7 +5251,7 @@ void sghyper(
 
 )
 {
-	bool paramSet=false;
+	bool_int paramSet=false_int;
 	double n=0;
 	double A=0;
 	double B=0;
@@ -5268,7 +5268,7 @@ void sghyper(
 			A=minm(m,a);
 			n=maxm(m,a);
 			B=N-A;
-			paramSet=true;
+			paramSet=true_int;
 		case IIB:
 			if (! paramSet) {
 				A=minm(m,a);
@@ -5288,14 +5288,14 @@ void sghyper(
 			A=maxm(m,a);
 			B=N-maxm(m,a);
 			*median=(double)xhypergeometric(0.5,(int)a,(int)m,(int)N);
-			paramSet=true;
+			paramSet=true_int;
 		case IAi:
 			if (! paramSet) {
 				n=minm(m,a);
 				A=maxm(m,a);
 				B=N-A;
 				*median=(double)xgenhypergeometric(0.5,a,m,N,variety);
-				paramSet=true;
+				paramSet=true_int;
 			}
 		case IAii:
  			if (! paramSet) {
@@ -5303,7 +5303,7 @@ void sghyper(
 				A=maxm(m,a);
 				B=N-A;
 				*median=(double)xgenhypergeometric(0.5,a,m,N,variety);
-				paramSet=true;
+				paramSet=true_int;
 			}
 		case IIA:
  			if (! paramSet) {
@@ -5311,7 +5311,7 @@ void sghyper(
 				n=maxm(m,a);
 				B=N-A;
 				*median=(double)xgenhypergeometric(0.5,a,m,N,variety);
-				paramSet=true;
+				paramSet=true_int;
 			}
 		case IIIA:
  			if (! paramSet) {
@@ -5319,7 +5319,7 @@ void sghyper(
 				n=maxm(m,a);
 				B=N-A;
 				*median=(double)xgenhypergeometric(0.5,a,m,N,variety);
-				paramSet=true;
+				paramSet=true_int;
 			}
 
  			T=A+B;
@@ -5356,11 +5356,11 @@ void sghyper(
 			break;
 		case IB:
 			if (! paramSet) {
-				paramSet=true;
+				paramSet=true_int;
 			}
 		case IV:
 			if (! paramSet) {
-				paramSet=true;
+				paramSet=true_int;
 			}
 
 			*median=(double)xgenhypergeometric(0.5,a,m,N,variety);
@@ -5617,11 +5617,11 @@ int  xgenhypergeometric(
 	if (0>p || p>1)
 		Rf_error("\nProbability must be in the 0 to 1 range");
 
-	int x=(int)(0.5+m1+sqrt(m2)*qnorm(p,0,1,true,false));
+	int x=(int)(0.5+m1+sqrt(m2)*qnorm(p,0,1,true_int,false_int));
 	x=maxm(0,x);
 
 
-   	bool larger=(p<=pgenhypergeometric(x,a,m,N,variety));
+   	bool_int larger=(p<=pgenhypergeometric(x,a,m,N,variety));
    	while (larger) {
       	if (x equals 0) {
       		return x;
@@ -5742,7 +5742,7 @@ double Integral(
 
 double NewtonRoot(
 	double guess,
-	bool useLog,	// When true, will iterate on z=log(x), keeping x positive
+	bool_int useLog,	// When true_int, will iterate on z=log(x), keeping x positive
 	double (*function)(double x),
 	double (*derivative)(double x),
 	double TOLN
@@ -5753,7 +5753,7 @@ double NewtonRoot(
 
 	double x=guess;
 	double z=(useLog)?log(x):x;
-	bool more;
+	bool_int more;
 	double h;
 	double ho=DBL_MAX;
 	double scale=1.0;
@@ -5778,7 +5778,7 @@ double NewtonRoot(
 		if (ho<=fabs(h))	{
 			scale/=2.0;
 			z+=h;		 // Restore value
-			more=true;
+			more=true_int;
 			continue;  // retry
 		}
 		scale=(scale<1.0)?scale*2.0:scale;
@@ -5865,7 +5865,7 @@ for generating random variables", Journ. Statistical Software.
 double nfix(void);
 double efix(void);
 
-static bool ziggInitialized=false; // Makes sure zigg is initialized at least once
+static bool_int ziggInitialized=false_int; // Makes sure zigg is initialized at least once
 
 static ULONG	jz,
 				jsr; // moved initialization
@@ -6057,8 +6057,8 @@ ULONG zSeed=362436069, wSeed=521288629;
 static int nSeed=1020;
 static ULONG Q[1020];   // using Q[endQ] to hold variable.
 static int endQ=nSeed-1;
-static bool QInitialized=FALSE; // Makes sure Q is initialized at least once
-//static bool QInitialized=false; // Makes sure Q is initialized at least once
+static bool_int QInitialized=FALSE; // Makes sure Q is initialized at least once
+//static bool_int QInitialized=false_int; // Makes sure Q is initialized at least once
 
 #ifdef CANTUSE
 // At present time, R allows only a 625 seed array 
@@ -6121,7 +6121,7 @@ ULONG MWC1019(void){
 DISTS_API void MWC1019R (
 	double *randomVector,
 	int *Np,
-	bool *initializep,
+	bool_int *initializep,
 	ULONG *seedp
 )
 {
@@ -6188,26 +6188,26 @@ George Marsaglia */
 DISTS_API void ziggR(
 	double *randomVector,
 	int *Np,
-	bool *type,
-	bool *initilizep,
+	bool_int *type,
+	bool_int *initilizep,
 	ULONG *seedp
 )
 {
 	int N=*Np;
 	int i;
 
-	ziggInitialized=false; // Thorsten Pohlert 2020-01-06
+	ziggInitialized=false_int; // Thorsten Pohlert 2020-01-06
 	
 	if (*initilizep) {
 		zigset(*seedp);
-		ziggInitialized=true;
+		ziggInitialized=true_int;
 	}
-	else if (ziggInitialized==false) {  // To always insure initialization
+	else if (ziggInitialized==false_int) {  // To always insure initialization
 		zigset((ULONG)556677);
-		ziggInitialized=true;
+		ziggInitialized=true_int;
 	}
 
-	if (*type==true) {
+	if (*type==true_int) {
 		for (i=0;i<N;i++) {
 			randomVector[i]=RNOR();
 		}

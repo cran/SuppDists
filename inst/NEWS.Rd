@@ -3,6 +3,15 @@
 \encoding{UTF-8}
 \section{Changes in version 1.1-9.8 (2024-09-03)}{
   \itemize{
+  \item CRAN Package Check Results for Package SuppDists
+Last updated on 2025-03-23 11:52:58 CET. Found the following significant warnings:
+    \code{./wheeler.h:19:9: warning: keyword is hidden by macro definition [-Wkeyword-macro]
+    ./wheeler.h:20:9: warning: keyword is hidden by macro definition [-Wkeyword-macro]
+    ./wheeler.h:21:9: warning: keyword is hidden by macro definition [-Wkeyword-macro]}. Fixed.
+    }
+}
+\section{Changes in version 1.1-9.8 (2024-09-03)}{
+  \itemize{
     \item PI was changed to M_PI in C++ files 
     as requested by CRAN check for additional issues \sQuote{Strict}.
     \item \code{Rf_} was prepended to function call \code{error} and \code{warning}

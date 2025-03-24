@@ -1,8 +1,8 @@
-e46f97f57267b853d104d2900ab82c06 *DESCRIPTION
+cbf0b02ff61d63b14177962be0e1c9da *DESCRIPTION
 2192e5ef3706cb331c911f8149212601 *NAMESPACE
 930ae7597c8ed60daef848bac8f19de4 *R/Dists.R
 26d143d22958d9180bbd3e071d3ccb09 *R/SuppDists-defunct.R
-dd62203429fdc39663a9b49fc3982a9f *inst/NEWS.Rd
+b0f228929a3675674241ad940a070734 *inst/NEWS.Rd
 ac131a78d294a58d64539d8a73f2577b *man/Friedman.Rd
 1742ec300d548a2b5f8d0482bdc8fc46 *man/Johnson.Rd
 643dc9e07f94133688c1db0574b148ae *man/Kendall.Rd
@@ -17,7 +17,7 @@ fbb41427153dc3ea96d4598e76e943a4 *man/ghyperTypes.Rd
 6928eb1a45c2d266a5b94906971fb0d4 *man/invGauss.Rd
 65b8f497d103f1d90af633abe7dae60d *man/maxFratio.Rd
 dca3fd92c6c1406c960b845d2d9aef03 *src/datatabs.h
-3fa7bc3824b28cc9661e79068b06bacd *src/dists.cpp
-ff626a0115046398ee8deebada804530 *src/dists.h
+b9639b0aed698fd473595c72c37174e7 *src/dists.cpp
+83efd52e49c57ee15efc26336480c8aa *src/dists.h
 365730e321f204fcb89efe200977186a *src/init.cpp
-57aa3635056fbf85a6b5d32e65fae157 *src/wheeler.h
+8ba7a598bbdd87ebdea3eb328f02b49b *src/wheeler.h

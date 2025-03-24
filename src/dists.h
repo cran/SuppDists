@@ -19,8 +19,8 @@ enum hyperType {
 	// Functions marked with EX may throw exceptions
 	
 	// ziggR and MWC1019R should be defunct
-//DISTS_API void ziggR(double *randomVector,int *Np,bool *type,bool *initilizep,ULONG *seedp);
-//DISTS_API void MWC1019R (double *randomVector,int *Np,bool *initializep,ULONG *seedp);
+//DISTS_API void ziggR(double *randomVector,int *Np,bool_int *type,bool_int *initilizep,ULONG *seedp);
+//DISTS_API void MWC1019R (double *randomVector,int *Np,bool_int *initializep,ULONG *seedp);
 #ifdef CANTUSE
 DISTS_API void user_unif_init(ULONG seed);
 DISTS_API int *user_unif_nseed(void);
@@ -65,21 +65,21 @@ DISTS_API void rinvGaussR(double *nup,double *lambdap,int *Np,int *Mp,double *va
 
 
 	// Kruskal Wallace
-  double  pKruskal_Wallis(double H,int c,int n,double U,bool doNormalScore);  //EX
-  double  qKruskal_Wallis(double H,int c,int n,double U,bool doNormalScore);  //EX
-  double  xKruskal_Wallis(double P,int c,int n,double U,bool doNormalScore); //EX
+  double  pKruskal_Wallis(double H,int c,int n,double U,bool_int doNormalScore);  //EX
+  double  qKruskal_Wallis(double H,int c,int n,double U,bool_int doNormalScore);  //EX
+  double  xKruskal_Wallis(double P,int c,int n,double U,bool_int doNormalScore); //EX
 double varKruskal_Wallis(double N,double C,double U);
 double varNormalScores(double N,double C,double U);
   void	rKruskal_Wallis(double* randArray,int N,int c,int n,double U,
-			bool doNormalScore);					   //EX
-  double  fKruskal_Wallis(double H,int c,int n,double U,bool doNormalScore);  //EX
-  void	sKruskal_Wallis(int c,int n,double U,bool doNormalScore,double *mode,
+			bool_int doNormalScore);					   //EX
+  double  fKruskal_Wallis(double H,int c,int n,double U,bool_int doNormalScore);  //EX
+  void	sKruskal_Wallis(int c,int n,double U,bool_int doNormalScore,double *mode,
 			double *third,double *fourth);  // EX
 DISTS_API void pKruskalWallisR(double *Hp,int *cp,int *np,double *Up,int *doNormalScorep,int *Np,double *valuep);
 DISTS_API void uKruskalWallisR(double *Hp,int *cp,int *np,double *Up,int *doNormalScorep,int *Np,double *valuep);
 DISTS_API void qKruskalWallisR(double *Hp,int *cp,int *np,double *Up,int *doNormalScorep,int *Np,double *valuep);
 DISTS_API void dKruskalWallisR(double *Hp,int *cp,int *np,double *Up,int *doNormalScorep,int *Np,double *valuep);
-DISTS_API void rKruskalWallisR(double *randArrayp,int *Np,int *Mp,int *cp,int *np,double *Up,bool *doNormalScorep);
+DISTS_API void rKruskalWallisR(double *randArrayp,int *Np,int *Mp,int *cp,int *np,double *Up,bool_int *doNormalScorep);
 DISTS_API void sKruskalWallisR(int *cp,int *np,double *Up,int *doNormalScorep,int *Np,double *varp,double *modep,double *thirdp,double *fourthp);
 
 	// Runs test
@@ -117,23 +117,23 @@ struct FriedmanGlobal {
 	FriedmanStrc *theDist;
 };
 
-bool DoExactFriedman(int r,int n,bool doRho);
-void ClearFriedmanGlobal(bool deleteAll);
+bool_int DoExactFriedman(int r,int n,bool_int doRho);
+void ClearFriedmanGlobal(bool_int deleteAll);
 
-  double  pfrie(double X,int r,int n,bool  doRho);   //EX
-  double  qfrie(double X,int r,int n,bool  doRho);   //EX
-  double  xfrie(double P,int r,int n,bool  doRho);  //EX
+  double  pfrie(double X,int r,int n,bool_int  doRho);   //EX
+  double  qfrie(double X,int r,int n,bool_int  doRho);   //EX
+  double  xfrie(double P,int r,int n,bool_int  doRho);  //EX
 double  medianfrie(int r,int n);				//EX
 double  modefrie(int r,int n);					// EX
-  void	rfrie(double* randArray,int N,int r,int n,bool doRho);	// EX
-  double	ffrie(double X,int r,int n,bool doRho);	   // EX
+  void	rfrie(double* randArray,int N,int r,int n,bool_int doRho);	// EX
+  double	ffrie(double X,int r,int n,bool_int doRho);	   // EX
 
-DISTS_API void pFriedmanR(double *Xp,int *rp,int *np,int *Np,bool *doRhop,double *valuep);
-DISTS_API void uFriedmanR(double *Xp,int *rp,int *np,int *Np,bool *doRhop,double *valuep);
-DISTS_API void dFriedmanR(double *Xp,int *rp,int *np,int *Np,bool *doRhop,double *valuep);
-DISTS_API void qFriedmanR(double *pp,int *rp,int *np,int *Np,bool *doRhop,double *valuep);
-DISTS_API void rFriedmanR(int *rp,int *np,bool *doRhop,int *Np,int *Mp,double *valuep);
-DISTS_API void sFriedmanR(int *rp,int *np,bool *rhop,int *Np,double *meanp,double *medianp,double *modep,double *variancep,	double *thirdp,double *fourthp);  
+DISTS_API void pFriedmanR(double *Xp,int *rp,int *np,int *Np,bool_int *doRhop,double *valuep);
+DISTS_API void uFriedmanR(double *Xp,int *rp,int *np,int *Np,bool_int *doRhop,double *valuep);
+DISTS_API void dFriedmanR(double *Xp,int *rp,int *np,int *Np,bool_int *doRhop,double *valuep);
+DISTS_API void qFriedmanR(double *pp,int *rp,int *np,int *Np,bool_int *doRhop,double *valuep);
+DISTS_API void rFriedmanR(int *rp,int *np,bool_int *doRhop,int *Np,int *Mp,double *valuep);
+DISTS_API void sFriedmanR(int *rp,int *np,bool_int *rhop,int *Np,double *meanp,double *medianp,double *modep,double *variancep,	double *thirdp,double *fourthp);  
 
 	// Maximum F ratios
   double pmaxfratio(double F,int df,int N);
@@ -260,11 +260,11 @@ DISTS_API void sghyperR(double *ap,double *mp,double *Np,int *Mp,double *meanp,d
 
 // Helper functions
 double  Integral(double lowX,double highX,double (*function)(double x));
-double  NewtonRoot(double guess,bool useLog,double (*function)(double x),double (*derivative)(double x));
+double  NewtonRoot(double guess,bool_int useLog,double (*function)(double x),double (*derivative)(double x));
   double  GaussianHypergometricFcn(double a,double b,double c,double x);
 
 double  Integral(double lowX,double highX,double (*function)(double x),double Tol);
-double  NewtonRoot(double guess,bool useLog,double (*function)(double x),double (*derivative)(double x),double TOLN);
+double  NewtonRoot(double guess,bool_int useLog,double (*function)(double x),double (*derivative)(double x),double TOLN);
 double  GaussianHypergometricFcn(double a,double b,double c,double x);
 
  
